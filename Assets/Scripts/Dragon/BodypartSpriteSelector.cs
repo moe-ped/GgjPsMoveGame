@@ -11,6 +11,7 @@ public struct BodyPartCollection {
 	public Sprite Body;
 	public Sprite LeftWing;
 	public Sprite RightWing;
+	public bool UseSecondaryWings;
 
 	public BodyPartCollection (string name) {
 		Name = name;
@@ -18,6 +19,7 @@ public struct BodyPartCollection {
 		Body = null;
 		LeftWing = null;
 		RightWing = null;
+		UseSecondaryWings = false;
 	}
 }
 
@@ -43,6 +45,10 @@ public class BodypartSpriteSelector : MonoBehaviour {
 	[SerializeField]
 	private Transform RightWing;
 	[SerializeField]
+	private Transform SecondLeftWing;
+	[SerializeField]
+	private Transform SecondRightWing;
+	[SerializeField]
 	public BodyPartCollection[] BodyPartCollections = new global::BodyPartCollection[3] {
 		new global::BodyPartCollection("Fire"),
 		new global::BodyPartCollection("Water"),
@@ -59,10 +65,18 @@ public class BodypartSpriteSelector : MonoBehaviour {
 			break;
 		case BodyPartType.Body:
 			Body.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].Body;
+			LeftWing.gameObject.SetActive(BodyPartCollections[(int)element].UseSecondaryWings == false);
+			RightWing.gameObject.SetActive(BodyPartCollections[(int)element].UseSecondaryWings == false);
+			SecondLeftWing.gameObject.SetActive(BodyPartCollections[(int)element].UseSecondaryWings);
+			SecondRightWing.gameObject.SetActive(BodyPartCollections[(int)element].UseSecondaryWings);
 			break;
 		case BodyPartType.Wings:
+			SecondLeftWing.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].LeftWing;
+			SecondRightWing.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].RightWing;
+
 			LeftWing.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].LeftWing;
 			RightWing.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].RightWing;
+
 			break;
 		}
 	}

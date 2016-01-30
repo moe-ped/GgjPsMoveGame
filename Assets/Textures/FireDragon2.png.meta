@@ -1,0 +1,114 @@
+fileFormatVersion: 2
+guid: 042f690e587f0a34a89dbc0dbb0b714d
+timeCreated: 1454176514
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: FireDragon2_0
+    21300002: FireDragon2_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 256
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: FireDragon2_0
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 341
+        width: 209
+        height: 424
+      alignment: 9
+      pivot: {x: 0.6761168, y: 0.05353683}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 25.69159, y: 220.30038}
+        - {x: 52.69159, y: 267.30038}
+        - {x: 52.69159, y: 281.30038}
+        - {x: 2.6915894, y: 311.30038}
+        - {x: -4.3084106, y: 396.30038}
+        - {x: -23.30841, y: 396.30038}
+        - {x: -40.30841, y: 381.30038}
+        - {x: -88.30841, y: 305.30038}
+        - {x: -137.30841, y: 218.30038}
+        - {x: -137.30841, y: 145.30038}
+        - {x: -64.30841, y: 24.300385}
+        - {x: -38.30841, y: -16.699615}
+        - {x: 4.6915894, y: -16.699615}
+        - {x: 16.69159, y: -15.6996155}
+        - {x: 27.69159, y: 8.3003845}
+        - {x: -9.308411, y: 90.300385}
+        - {x: 40.69159, y: 141.30038}
+    - name: FireDragon2_1
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 334
+        width: 202
+        height: 438
+      alignment: 9
+      pivot: {x: 0.36116555, y: 0.035793077}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 126.044556, y: 222.32263}
+        - {x: 126.044556, y: 323.32263}
+        - {x: 98.044556, y: 364.32263}
+        - {x: 75.044556, y: 422.32263}
+        - {x: 48.044556, y: 422.32263}
+        - {x: -67.955444, y: 276.32263}
+        - {x: -70.955444, y: 265.32263}
+        - {x: -70.955444, y: 175.32263}
+        - {x: -54.955444, y: 168.32263}
+        - {x: -20.955444, y: 7.322632}
+        - {x: -15.955444, y: -4.677368}
+        - {x: -8.955444, y: -13.677368}
+        - {x: 32.044556, y: -13.677368}
+        - {x: 46.044556, y: -11.677368}
+        - {x: 87.044556, y: 144.32263}
+        - {x: 106.044556, y: 156.32263}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
