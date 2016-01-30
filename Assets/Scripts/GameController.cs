@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour {
 
 	[SerializeField]
 	GameObject ballPrefab;
+	[SerializeField]
+	private Cannon cannon;
 
 	bool beginInput = false;
 
@@ -237,8 +239,7 @@ public class GameController : MonoBehaviour {
 
 
 	void shootBall() {
-		GameObject ball = Instantiate(ballPrefab);
-		ball.GetComponent<Rigidbody>().velocity = new Vector3 (10f,10f,0);
+		cannon.Shoot ();
 	}
 
 }
