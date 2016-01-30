@@ -6,7 +6,7 @@ public class Cannon : MonoBehaviour {
 	[SerializeField]
 	private GameObject CannonballPrefab;
 	[SerializeField]
-	private IGestureProvider GestureProvider;
+	private KeyboardGestureProvider GestureProvider;
 
 	private GestureType[] Gestures = new GestureType[3];
 	private bool AllGesturesMade {

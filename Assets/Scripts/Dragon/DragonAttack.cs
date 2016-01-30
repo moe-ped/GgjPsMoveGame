@@ -17,7 +17,7 @@ public class DragonAttack : MonoBehaviour {
 	// Name is stupid
 	public void GetHit (Element[] elements) {
 		if (ThatHurt (elements)) {
-			Destroy (gameObject);
+			StartCoroutine (DragonDied(gameObject));
 		}
 	}
 
@@ -29,5 +29,11 @@ public class DragonAttack : MonoBehaviour {
 			}
 		}
 		return true;
+	}
+		
+	IEnumerator DragonDied(GameObject dragon) {
+		dragon.GetComponent<Animator>().Play("Died");
+		yield return new WaitForSeconds(3f);
+		Destroy (dragon);
 	}
 }

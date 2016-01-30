@@ -2,12 +2,12 @@
 using System.Collections;
 using System;
 
-public enum GestureType { 
+/*public enum GestureType { 
 	Left, 
 	Right, 
 	Up,
 	None = -1
-}
+}*/
 
 public interface IGestureProvider {
 
