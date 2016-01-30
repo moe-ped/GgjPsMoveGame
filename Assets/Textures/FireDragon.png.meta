@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: a6f4fefe8597d29448579abbf36edaee
+timeCreated: 1454152283
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: EartDragon_0
+    21300002: EartDragon_1
+    21300004: EartDragon_2
+    21300006: EartDragon_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 256
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: EartDragon_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 399
+        width: 298
+        height: 388
+      alignment: 9
+      pivot: {x: 0.80081004, y: 0.026758961}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -69.64139, y: 376.61752}
+        - {x: -99.64139, y: 376.61752}
+        - {x: -103.64139, y: 374.61752}
+        - {x: -117.64139, y: 309.61752}
+        - {x: -119.64139, y: 294.61752}
+        - {x: -151.64139, y: 312.61752}
+        - {x: -180.64139, y: 314.61752}
+        - {x: -198.64139, y: 296.61752}
+        - {x: -233.64139, y: 216.61752}
+        - {x: -233.64139, y: 147.61752}
+        - {x: -204.64139, y: 102.61752}
+        - {x: -189.64139, y: 98.61752}
+        - {x: -150.64139, y: 99.61752}
+        - {x: -138.64139, y: 101.61752}
+        - {x: -55.641388, y: 105.61752}
+        - {x: -6.641388, y: -7.382477}
+        - {x: 27.358612, y: -7.382477}
+        - {x: 54.358612, y: 37.617523}
+        - {x: 54.358612, y: 123.61752}
+        - {x: 36.358612, y: 216.61752}
+    - name: EartDragon_1
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 508
+        width: 218
+        height: 267
+      alignment: 9
+      pivot: {x: 0.35367942, y: 0.052014753}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 132.89789, y: 252.11206}
+        - {x: 113.89789, y: 252.11206}
+        - {x: -34.10211, y: 161.11206}
+        - {x: -35.10211, y: 78.11206}
+        - {x: -35.10211, y: 5.1120605}
+        - {x: -34.10211, y: 1.1120605}
+        - {x: -24.102112, y: -7.8879395}
+        - {x: 58.89789, y: -7.8879395}
+        - {x: 140.89789, y: 84.11206}
+        - {x: 140.89789, y: 250.11206}
+    - name: EartDragon_2
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 492
+        width: 186
+        height: 266
+      alignment: 9
+      pivot: {x: 0.2427588, y: 0.085287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 133.84686, y: 242.31366}
+        - {x: 80.84686, y: 242.31366}
+        - {x: -38.153137, y: 150.31366}
+        - {x: -38.153137, y: -6.6863403}
+        - {x: -28.153137, y: -17.68634}
+        - {x: 54.846863, y: -17.68634}
+        - {x: 140.84686, y: 80.31366}
+        - {x: 140.84686, y: 224.31366}
+        - {x: 135.84686, y: 239.31366}
+    - name: EartDragon_3
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 23
+        width: 404
+        height: 344
+      alignment: 9
+      pivot: {x: 0.10001063, y: 0.5004159}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 235.5957, y: -162.14308}
+        - {x: 348.5957, y: -169.14308}
+        - {x: 354.5957, y: -166.14308}
+        - {x: 354.5957, y: -134.14308}
+        - {x: 345.5957, y: -117.14308}
+        - {x: 348.5957, y: -78.14308}
+        - {x: 295.5957, y: -30.143082}
+        - {x: 347.5957, y: 19.856918}
+        - {x: 347.5957, y: 44.85692}
+        - {x: 323.5957, y: 53.85692}
+        - {x: 330.5957, y: 101.85692}
+        - {x: 292.5957, y: 170.85692}
+        - {x: 235.5957, y: 170.85692}
+        - {x: 179.5957, y: 83.85692}
+        - {x: 165.5957, y: 63.85692}
+        - {x: 57.595703, y: 84.85692}
+        - {x: 38.595703, y: 83.85692}
+        - {x: -7.404297, y: 30.856918}
+        - {x: -9.404297, y: -38.14308}
+        - {x: -36.404297, y: -101.14308}
+        - {x: -36.404297, y: -156.14308}
+        - {x: 11.595703, y: -164.14308}
+        - {x: 65.5957, y: -152.14308}
+        - {x: 71.5957, y: -147.14308}
+        - {x: 68.5957, y: -94.14308}
+        - {x: 74.5957, y: -147.14308}
+        - {x: 77.5957, y: -172.14308}
+        - {x: 182.5957, y: -172.14308}
+        - {x: 189.5957, y: -159.14308}
+        - {x: 185.5957, y: -114.14308}
+        - {x: 230.5957, y: -102.14308}
+      - - {x: 76.5957, y: 68.85692}
+        - {x: 79.5957, y: 69.85692}
+        - {x: 79.5957, y: 72.85692}
+        - {x: 76.5957, y: 73.85692}
+        - {x: 74.5957, y: 71.85692}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
