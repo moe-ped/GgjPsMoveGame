@@ -11,6 +11,7 @@ public struct BodyPartCollection {
 	public Sprite Body;
 	public Sprite LeftWing;
 	public Sprite RightWing;
+	public bool UseSecondaryWings;
 
 	public BodyPartCollection (string name) {
 		Name = name;
@@ -18,6 +19,7 @@ public struct BodyPartCollection {
 		Body = null;
 		LeftWing = null;
 		RightWing = null;
+		UseSecondaryWings = false;
 	}
 }
 
@@ -43,17 +45,15 @@ public class BodypartSpriteSelector : MonoBehaviour {
 	[SerializeField]
 	private Transform RightWing;
 	[SerializeField]
-	private AudioClip Roar;
-
+	private Transform SecondLeftWing;
+	[SerializeField]
+	private Transform SecondRightWing;
 	[SerializeField]
 	public BodyPartCollection[] BodyPartCollections = new global::BodyPartCollection[3] {
 		new global::BodyPartCollection("Fire"),
 		new global::BodyPartCollection("Water"),
 		new global::BodyPartCollection("Earth")
 	};
-
-	[SerializeField]
-	AudioClip[] RoarCollection;
 
 	public void Init() {
 	}
@@ -65,27 +65,19 @@ public class BodypartSpriteSelector : MonoBehaviour {
 			break;
 		case BodyPartType.Body:
 			Body.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].Body;
+			LeftWing.gameObject.SetActive(BodyPartCollections[(int)element].UseSecondaryWings == false);
+			RightWing.gameObject.SetActive(BodyPartCollections[(int)element].UseSecondaryWings == false);
+			SecondLeftWing.gameObject.SetActive(BodyPartCollections[(int)element].UseSecondaryWings);
+			SecondRightWing.gameObject.SetActive(BodyPartCollections[(int)element].UseSecondaryWings);
 			break;
 		case BodyPartType.Wings:
+			SecondLeftWing.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].LeftWing;
+			SecondRightWing.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].RightWing;
+
 			LeftWing.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].LeftWing;
 			RightWing.gameObject.GetComponent<SpriteRenderer> ().sprite = BodyPartCollections [(int)element].RightWing;
+
 			break;
 		}
 	}
-
-	public void SetRoarSound(int index) {
-		Roar = RoarCollection[index];
-	}
-
-	public void BeginRoaring() {
-		StartCoroutine("DragonRoar");
-	}
-
-	IEnumerator DragonRoar() {
-		while (true) {
-			AudioSource.PlayClipAtPoint(Roar,Head.position);
-			yield return new WaitForSeconds(UnityEngine.Random.Range(3.5f, 7f));
-		}
-	}
-
 }
