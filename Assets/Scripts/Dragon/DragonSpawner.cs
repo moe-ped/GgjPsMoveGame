@@ -36,6 +36,8 @@ public class DragonSpawner : MonoBehaviour {
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Head, (Element)Random.Range(0, 3));
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Body, (Element)Random.Range(0, 3));
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Wings, (Element)Random.Range(0, 3));
+		bodypartSpriteSelector.SetRoarSound(Random.Range(0,4));
+		bodypartSpriteSelector.BeginRoaring();
 	}
 
 	private void DestroyDragons() {
@@ -58,6 +60,8 @@ public class DragonSpawner : MonoBehaviour {
 			yield return new WaitForSeconds (SpawnCooldown);
 		}
 	}
+
+
 
 	void OnDrawGizmos() {
 		Gizmos.color = Color.green;

@@ -43,11 +43,17 @@ public class BodypartSpriteSelector : MonoBehaviour {
 	[SerializeField]
 	private Transform RightWing;
 	[SerializeField]
+	private AudioClip Roar;
+
+	[SerializeField]
 	public BodyPartCollection[] BodyPartCollections = new global::BodyPartCollection[3] {
 		new global::BodyPartCollection("Fire"),
 		new global::BodyPartCollection("Water"),
 		new global::BodyPartCollection("Earth")
 	};
+
+	[SerializeField]
+	AudioClip[] RoarCollection;
 
 	public void Init() {
 	}
@@ -66,4 +72,20 @@ public class BodypartSpriteSelector : MonoBehaviour {
 			break;
 		}
 	}
+
+	public void SetRoarSound(int index) {
+		Roar = RoarCollection[index];
+	}
+
+	public void BeginRoaring() {
+		StartCoroutine("DragonRoar");
+	}
+
+	IEnumerator DragonRoar() {
+		while (true) {
+			AudioSource.PlayClipAtPoint(Roar,Head.position);
+			yield return new WaitForSeconds(UnityEngine.Random.Range(3.5f, 7f));
+		}
+	}
+
 }
