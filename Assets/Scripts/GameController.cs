@@ -3,6 +3,11 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
+/**
+ * @author Mihail Georgiev
+ * */
+
+
 public class GameController : MonoBehaviour {
 
 	[SerializeField]
