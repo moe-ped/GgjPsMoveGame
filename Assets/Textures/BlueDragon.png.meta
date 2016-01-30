@@ -1,0 +1,122 @@
+fileFormatVersion: 2
+guid: 03f48bdd494ebb14f88e3876874e6a01
+timeCreated: 1454144857
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: GreenDragon_0
+    21300002: GreenDragon_1
+    21300004: GreenDragon_2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: GreenDragon_0
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 145
+        width: 76
+        height: 101
+      alignment: 9
+      pivot: {x: 0.1279855, y: 0.029205926}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 17.273102, y: 98.0502}
+        - {x: -9.726898, y: 87.0502}
+        - {x: -9.726898, y: -2.9497986}
+        - {x: 27.273102, y: -2.9497986}
+        - {x: 65.2731, y: 48.0502}
+        - {x: 65.2731, y: 80.0502}
+        - {x: 50.2731, y: 98.0502}
+    - name: GreenDragon_1
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 137
+        width: 91
+        height: 95
+      alignment: 9
+      pivot: {x: 0.80598587, y: 0.18886076}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -46.34471, y: 77.05823}
+        - {x: -73.34471, y: 62.058228}
+        - {x: -73.34471, y: -6.9417725}
+        - {x: -59.34471, y: -17.941772}
+        - {x: 14.655289, y: -17.941772}
+        - {x: 17.655289, y: -3.9417725}
+        - {x: 17.655289, y: 64.05823}
+        - {x: -4.3447113, y: 77.05823}
+    - name: GreenDragon_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 10
+        width: 180
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64, y: 60.5}
+        - {x: -90, y: 27.5}
+        - {x: -90, y: -60.5}
+        - {x: 89, y: -60.5}
+        - {x: 89, y: 19.5}
+        - {x: 61, y: 60.5}
+      - - {x: -89, y: -18.5}
+        - {x: -90, y: -19.5}
+        - {x: -90, y: -26.5}
+        - {x: -89, y: -27.5}
+        - {x: -84, y: -27.5}
+        - {x: -83, y: -25.5}
+        - {x: -83, y: -21.5}
+        - {x: -87, y: -18.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
