@@ -96,9 +96,14 @@ public class Cannon : MonoBehaviour {
 		if(!shot)
 			FailedShoot();
 
-		foreach(var controller in GestureManager.Instance.Controllers){
-			StartCoroutine(Blink (controller.Controller, controller.sphereLight.color));
-			GestureManager.Instance.StopControllerRumble(controller.Controller.ControllerId);
+		try {
+			foreach(var controller in GestureManager.Instance.Controllers){
+				StartCoroutine(Blink (controller.Controller, controller.sphereLight.color));
+				GestureManager.Instance.StopControllerRumble(controller.Controller.ControllerId);
+			}
+		}
+		catch (System.Exception ex) {
+			Debug.LogWarning (ex + ". I dont give a fuck");
 		}
 		
 
