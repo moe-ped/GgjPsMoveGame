@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 public class NotificationManager : MonoBehaviour {
 
@@ -27,6 +28,10 @@ public class NotificationManager : MonoBehaviour {
 		messages.Add(notification);
 
 		notification.transform.SetParent (GameObject.Find ("Canvas").transform);
+		notification.transform.localScale = Vector3.one;
+
+		var extraY = messages.Count != 0 ? messages.Last().transform.position.y - 5 : 0;
+		notification.transform.localPosition = new Vector3(0,extraY);
 	}
 
 	public void Update(){
@@ -35,10 +40,10 @@ public class NotificationManager : MonoBehaviour {
 		{
 			var msg = messages[i];
 			var pos = msg.transform.position;
-			pos.y -= 5;
+			pos.y += 1f;
 			msg.transform.position = pos;
 
-			if(pos.y <= -50){
+			if(pos.y >= 1000){
 				GameObject.Destroy(msg.gameObject);
 				messages.RemoveAt(i);
 			}

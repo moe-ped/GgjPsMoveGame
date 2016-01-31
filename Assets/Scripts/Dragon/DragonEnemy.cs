@@ -11,6 +11,8 @@ public class DragonEnemy : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other) {
 		if (other.gameObject.tag == "Player") {
 			Destroy (gameObject);
+
+
 		}
 	}
 
@@ -32,6 +34,7 @@ public class DragonEnemy : MonoBehaviour {
 		
 	IEnumerator DragonDied(GameObject dragon) {
 		dragon.GetComponent<Animator>().Play("Died");
+		GameScoreManager.Instance.AddSlainDragon();
 		yield return new WaitForSeconds(3f);
 		Destroy (dragon);
 	}

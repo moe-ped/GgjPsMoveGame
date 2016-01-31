@@ -10,10 +10,12 @@ public class DragonSpawner : MonoBehaviour {
 	private float SpawnCooldown = 1;
 	[SerializeField]
 	private float DragonSpeed = 0.2f;
-	public float[] LanesY = new float[3];
 
 	private List<Transform> Dragons = new List<Transform> ();
 
+	public Transform[] StartPositions;
+	public Transform[] EndPositions;
+	
 	// Use this for initialization
 	void Start () {
 		// Test
@@ -23,12 +25,14 @@ public class DragonSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//DestroyDragons ();
+
+
 	}
 
 	private void SpawnDragon () {
-		float laneY = LanesY[Random.Range(0, 3)];
-		Vector3 position = transform.position + Vector3.up * laneY;
-		GameObject dragon = (GameObject)Instantiate (DragonPrefab, position, Quaternion.identity);
+		int lane = Random.Range(0, 3);
+		Vector3 startPosition = StartPositions[lane].position;
+		GameObject dragon = (GameObject)Instantiate (DragonPrefab, startPosition, Quaternion.identity);
 		BodypartSpriteSelector bodypartSpriteSelector = dragon.GetComponent<BodypartSpriteSelector> ();
 		MoveAtConstantSpeed moveAtConstantSpeed = dragon.GetComponent<MoveAtConstantSpeed> ();
 		DragonEnemy dragonAttack = dragon.GetComponent<DragonEnemy> ();
@@ -37,7 +41,7 @@ public class DragonSpawner : MonoBehaviour {
 			elements [i] = (Element)Random.Range (0, 3);
 		}
 		dragonAttack.Elements = elements;
-		moveAtConstantSpeed.velocity = Vector2.left * DragonSpeed;
+		moveAtConstantSpeed.velocity = ( EndPositions[lane].position - startPosition).normalized;
 		//Dragons.Add (bodypartSpriteSelector.transform);
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Head, elements[0]);
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Body, elements[1]);
@@ -67,13 +71,11 @@ public class DragonSpawner : MonoBehaviour {
 		}
 	}
 
-
-
-	void OnDrawGizmos() {
-		Gizmos.color = Color.green;
-		foreach (var laneY in LanesY) {
-			Vector3 position = transform.position + Vector3.up * laneY;
-			Gizmos.DrawLine (position, position + Vector3.left * 10);
-		}
-	}
+	//void OnDrawGizmos() {
+	//	Gizmos.color = Color.green;
+	//	foreach (var laneY in lan) {
+	//		Vector3 position = transform.position + Vector3.up * laneY;
+	//		Gizmos.DrawLine (position, position + Vector3.left * 10);
+	//	}
+	//}
 }

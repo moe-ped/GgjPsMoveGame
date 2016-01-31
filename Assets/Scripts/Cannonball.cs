@@ -20,19 +20,30 @@ public class Cannonball : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D (Collision2D other) {
-		if (other.gameObject.tag == "Enemy") {
+		if (other.gameObject.tag == "Enemy")
+		{
 			var dragon = other.gameObject.GetComponent<DragonEnemy> ();
 			dragon.HitWithElements (Elements);
 			DestroyParticleSystems ();
 			Destroy (gameObject);
+
+
+			foreach(var controller in GestureManager.Instance.Controllers){
+				GestureManager.Instance.SetControllerRumble(controller.Controller.ControllerId, 1.0f, 0.4f);
+			}
 		}
 	}
 
 	void SpawnParticles () {
-		foreach (var element in _elements) {
+		try{
+		foreach (var element in _elements)
+		{
 			Transform particleSystem = ((GameObject)Instantiate (ParticleSystems[(int)element], transform.position, Quaternion.identity)).transform;
 			particleSystem.SetParent (transform);
 			SpawnedParticleSystems.Add (particleSystem);
+		}
+		} catch(UnityException e){
+			Debug.Log(e);
 		}
 	}
 

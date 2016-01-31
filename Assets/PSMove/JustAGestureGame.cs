@@ -12,7 +12,7 @@ public class JustAGestureGame : MonoBehaviour {
 
 	void Start () 
 	{
-		GestureManager.Instance.OnGesture += OnGestureHandler;
+		//GestureManager.Instance.OnGesture += OnGestureHandler;
 	}
 
 	void OnGestureHandler(PSMoveEvent ev)
@@ -21,7 +21,7 @@ public class JustAGestureGame : MonoBehaviour {
 			StartCoroutine(Blink (ev.Controller.Controller, ev.Controller.sphereLight.color));
 			
 			GestureManager.Instance.StopControllerRumble(ev.ControllerId);
-			NotificationManager.Instance.ShowMessage("BOOM!");
+			//NotificationManager.Instance.ShowMessage("BOOM!");
 		}
 		else{
 			NotificationManager.Instance.ShowMessage(ev.ControllerId + " : " + ev.EventType.ToString());
