@@ -58,7 +58,7 @@ public class DragonSpawner : MonoBehaviour {
 			elements [i] = (Element)Random.Range (0, 3);
 		}
 		dragonAttack.Elements = elements;
-		moveAtConstantSpeed.velocity = Vector2.left * (LevelBalancingValues[CurrentLevel].DragonSpeed + Random.Range(-LevelBalancingValues[CurrentLevel].DragonSpeedRandomDeviation, LevelBalancingValues[CurrentLevel].DragonSpeedRandomDeviation));
+		moveAtConstantSpeed.velocity = ( EndPositions[lane].position - startPosition).normalized * (LevelBalancingValues[CurrentLevel].DragonSpeed + Random.Range(-LevelBalancingValues[CurrentLevel].DragonSpeedRandomDeviation, LevelBalancingValues[CurrentLevel].DragonSpeedRandomDeviation));
 		//Dragons.Add (bodypartSpriteSelector.transform);
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Head, elements[0]);
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Body, elements[1]);
