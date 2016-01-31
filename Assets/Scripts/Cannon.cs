@@ -23,8 +23,8 @@ public class Cannon : MonoBehaviour {
 
 	// Test
 	void Start () {
-		//GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
-		GestureProvider = FindObjectOfType<GestureManager> ();
+		GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
+		//GestureProvider = FindObjectOfType<GestureManager> ();
 
 		GestureProvider.OnGesture += AddGesture;
 		ResetGestures ();
