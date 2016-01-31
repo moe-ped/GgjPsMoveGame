@@ -73,8 +73,13 @@ public class Cannon : MonoBehaviour {
 
 	private void EnterWaitingToShootPhase()
 	{
-		foreach (var controller in GestureManager.Instance.Controllers) {
-			GestureManager.Instance.SetControllerRumble (controller.Controller.ControllerId, 0.65f, 50);
+		try {
+			foreach (var controller in GestureManager.Instance.Controllers) {
+				GestureManager.Instance.SetControllerRumble (controller.Controller.ControllerId, 0.65f, 50);
+			}
+		}
+		catch(System.Exception ex) {
+			Debug.LogWarning (ex);
 		}
 
 		isInWaitingToShootPhase = true;
