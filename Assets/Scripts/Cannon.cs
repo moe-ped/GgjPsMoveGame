@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Cannon : MonoBehaviour {
 
 	public static Cannon Instance { get; private set; }
-	public const float TimeToShootTogether = 1.0f;
+	public const float TimeToShootTogether = 1.5f;
 
 	[SerializeField]
 	private GameObject CannonballPrefab;
@@ -62,6 +62,7 @@ public class Cannon : MonoBehaviour {
 				if (hasGesture) {
 					if (playersThatShot.Find (x => x == ev.ControllerId) != null) {
 						playersThatShot.Add (ev.ControllerId);
+						GestureManager.Instance.SetControllerRumble (ev.ControllerId, 0.8f, 0.1f);
 					}
 
 					if (!isInWaitingToShootPhase) {
