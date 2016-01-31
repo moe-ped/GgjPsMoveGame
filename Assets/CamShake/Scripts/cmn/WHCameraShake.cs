@@ -135,9 +135,10 @@ public class WHCameraShake : MonoBehaviour {
 				curPos					+= curPosSpeed*dt;
 //Debug.Log(">>>>:"+Time.frameCount+"curPosSpeed:"+curPosSpeed);
 			}
-			if(gameObject.tag == "MainCamera")
+			if(gameObject.tag == "MainCamera"){
 				pos.z = -10f;
-			
+				pos.y = 1f;
+			}
 			transform.localPosition	= pos;
 
 		}
