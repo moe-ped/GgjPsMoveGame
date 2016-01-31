@@ -8,6 +8,7 @@ public struct Level {
 	public float SpawnCooldown;
 	public float DragonSpeed;
 	public float DragonSpeedRandomDeviation;
+	public int Colors;
 }
 
 public class DragonSpawner : MonoBehaviour {
