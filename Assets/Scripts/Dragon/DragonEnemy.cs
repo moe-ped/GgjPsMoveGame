@@ -19,8 +19,11 @@ public class DragonEnemy : MonoBehaviour {
 	public void HitWithElements (Element[] elements) {
 		if (ThatHurt (elements)) {
 			DragonSpawner.Instance.OnDragonKilled ();
-			StartCoroutine (DragonDied(gameObject));
+			StartCoroutine (DragonDied (gameObject));
+		} else {
+			GamePhaseManager.Instance.StartPhase (GamePhase.Focus);
 		}
+			
 	}
 
 	private bool ThatHurt(Element[] elements) {
@@ -36,7 +39,8 @@ public class DragonEnemy : MonoBehaviour {
 	IEnumerator DragonDied(GameObject dragon) {
 		dragon.GetComponent<Animator>().Play("Died");
 		GameScoreManager.Instance.AddSlainDragon();
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(0.6f);
 		Destroy (dragon);
+		GamePhaseManager.Instance.StartPhase (GamePhase.Focus);
 	}
 }

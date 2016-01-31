@@ -43,31 +43,40 @@ public class Cannon : MonoBehaviour {
 	}
 
 
+	private bool AllHaveGesture(){
+		return CurrentGestures [0] != EventType.None && CurrentGestures [1] != EventType.None && CurrentGestures [2] != EventType.None;
+	}
+
 	public void OnGestureHandler (PSMoveEvent ev) {
 
-		if(ev.EventType == EventType.PsMoveButtonPressed)
+		//if (GamePhaseManager.Instance.CurrentPhase == GamePhase.WaitForFire) 
 		{
-			var hasGesture = CurrentGestures [((int) ev.ControllerId)-1] != EventType.None;
+			if (ev.EventType == EventType.PsMoveButtonPressed && AllHaveGesture()) {
+				var hasGesture = CurrentGestures [((int)ev.ControllerId) - 1] != EventType.None;
 
-			if(hasGesture){
-				if(playersThatShot.Find(x => x == ev.ControllerId) != null){
-					playersThatShot.Add(ev.ControllerId);
+				if (hasGesture) {
+					if (playersThatShot.Find (x => x == ev.ControllerId) != null) {
+						playersThatShot.Add (ev.ControllerId);
+					}
+
+					if (!isInWaitingToShootPhase) {
+						EnterWaitingToShootPhase ();
+					}
 				}
-				if(!isInWaitingToShootPhase){
-					EnterWaitingToShootPhase();
-				}
+				return;
 			}
-			return;
 		}
 
-		if(ev.EventType == EventType.Left || ev.EventType == EventType.Right || ev.EventType == EventType.Up){
-			CurrentGestures [((int) ev.ControllerId)-1] = ev.EventType;
+		if (GamePhaseManager.Instance.CurrentPhase == GamePhase.Cast) {
+			if (ev.EventType == EventType.Left || ev.EventType == EventType.Right || ev.EventType == EventType.Up) {
+				CurrentGestures [((int)ev.ControllerId) - 1] = ev.EventType;
 
-			//NotificationManager.Instance.ShowMessage(ev.ControllerId + " : " + ev.EventType.ToString());
+				//NotificationManager.Instance.ShowMessage(ev.ControllerId + " : " + ev.EventType.ToString());
 
-			GestureManager.Instance.SetControllerLEDColor(ev.ControllerId, GesturesToColorsMap[ev.EventType]);
+				GestureManager.Instance.SetControllerLEDColor (ev.ControllerId, GesturesToColorsMap [ev.EventType]);
 
-			return;
+				return;
+			}
 		}
 	}
 
@@ -90,6 +99,7 @@ public class Cannon : MonoBehaviour {
 	}
 
 	IEnumerator WaitingToShootPhase(){
+		GamePhaseManager.Instance.StartPhase (GamePhase.WaitForFire);
 		float time = 0.0f;
 		bool shot = false;
 
@@ -114,7 +124,7 @@ public class Cannon : MonoBehaviour {
 			}
 		}
 		catch (System.Exception ex) {
-			Debug.LogWarning (ex + ". I dont give a fuck");
+			Debug.LogWarning (ex);
 		}
 		
 
@@ -125,10 +135,13 @@ public class Cannon : MonoBehaviour {
 	private void FailedShoot(){
 		//TODO play sound, Ahwww
 		NotificationManager.Instance.ShowMessage("Failed shot!");
+		GamePhaseManager.Instance.StartPhase (GamePhase.Focus);
 	}
 
 	private void Shoot () {
 		NotificationManager.Instance.ShowMessage("Nice shot!");
+		GamePhaseManager.Instance.StartPhase (GamePhase.Fire);
+
 		
 		GameObject cannonball = (GameObject) Instantiate (CannonballPrefab, transform.position, transform.rotation);
 		cannonball.GetComponent<Cannonball> ().Elements = GesturesToElements(CurrentGestures);

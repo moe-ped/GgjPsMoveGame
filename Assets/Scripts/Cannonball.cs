@@ -25,8 +25,7 @@ public class Cannonball : MonoBehaviour {
 		{
 			var dragon = other.gameObject.GetComponent<DragonEnemy> ();
 			dragon.HitWithElements (Elements);
-			DestroyParticleSystems ();
-			Destroy (gameObject);
+			Kill ();
 
 			try {
 				foreach(var controller in GestureManager.Instance.Controllers){
@@ -38,6 +37,21 @@ public class Cannonball : MonoBehaviour {
 			}
 		}
 	}
+
+	void Update(){
+		if (this.transform.position.x >= 10 || this.transform.position.y > 7) {
+			Kill ();
+			GamePhaseManager.Instance.StartPhase (GamePhase.Focus);
+		}
+
+	}
+
+
+	void Kill(){
+		DestroyParticleSystems ();
+		Destroy (gameObject);
+	}
+
 
 	void SpawnParticles () {
 		try{
