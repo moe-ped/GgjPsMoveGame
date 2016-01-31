@@ -20,5 +20,4 @@ public class GameScoreManager : MonoBehaviour {
 
 		ScoreLabel.text = Score + " dragons slain!";
 	}
-
 }
