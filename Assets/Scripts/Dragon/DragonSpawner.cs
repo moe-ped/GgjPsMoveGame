@@ -68,7 +68,6 @@ public class DragonSpawner : MonoBehaviour {
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Body, elements[1]);
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Wings, elements[2]);
 		bodypartSpriteSelector.SetRoarSound(Random.Range(0,4));
-		bodypartSpriteSelector.BeginRoaring();
 	}
 
 	private void DestroyDragons() {
