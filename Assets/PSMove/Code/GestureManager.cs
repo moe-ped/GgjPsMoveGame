@@ -9,13 +9,23 @@ public class GestureManager : MonoBehaviour, IGestureProvider{
 
 	public Action<PSMoveEvent> OnGesture { get; set; }
 
-	public List<MoveController> Controllers = new List<MoveController>();
+	public List<MoveController> Controllers{ get{
+
+			if(Application.platform != RuntimePlatform.OSXEditor) return null;
+			return _controllers;
+		}
+	}
+
+
+	List<MoveController> _controllers;
 
 	public void Awake(){
 		Instance = this;
 	}
 
 	public void AddController(MoveController controller){
+		if(Application.platform != RuntimePlatform.OSXEditor) return;
+		
 		Controllers.Add(controller);
 
 		controller.Controller.ControllerId = (ControllerId) Controllers.Count;
@@ -23,11 +33,15 @@ public class GestureManager : MonoBehaviour, IGestureProvider{
 	}
 
 	public void RemoveController(MoveController controller){
+		if(Application.platform != RuntimePlatform.OSXEditor) return;
+		
 		Controllers.Remove(controller);
 	}
 
 	public void SetControllerLEDColor (ControllerId controllerId, Color color, float resetColorAfterTime = -1)
 	{
+		if(Application.platform != RuntimePlatform.OSXEditor) return;
+
 		GetControllerById(controllerId).SetLED(color);
 		GetControllerById(controllerId).Controller.SetLED(color);
 
@@ -37,11 +51,15 @@ public class GestureManager : MonoBehaviour, IGestureProvider{
 	}
 
 	public void StopControllerRumble(ControllerId controllerId){
+		if(Application.platform != RuntimePlatform.OSXEditor) return;
+		
 		GetControllerById(controllerId).Controller.StopConstantRumbleIfActive();
 	}
 
 	public void SetControllerRumble (ControllerId controllerId, float rumbleIntensity, float rumbleDuration = 0.7f)
 	{
+		if(Application.platform != RuntimePlatform.OSXEditor) return;
+		
 		if(rumbleDuration != -1)
 		{
 			GetControllerById(controllerId).Controller.LongerRumble(rumbleIntensity, rumbleDuration);

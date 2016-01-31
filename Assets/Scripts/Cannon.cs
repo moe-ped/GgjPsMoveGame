@@ -13,7 +13,7 @@ public class Cannon : MonoBehaviour {
 
 	private IGestureProvider GestureProvider;
 
-	private EventType[] CurrentGestures = new EventType[3];
+	public EventType[] CurrentGestures = new EventType[3];
 
 	List<ControllerId> playersThatShot = new List<ControllerId>();
 
@@ -32,8 +32,8 @@ public class Cannon : MonoBehaviour {
 
 	// Test
 	void Start () {
-		//GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
-		GestureProvider = FindObjectOfType<GestureManager> ();
+		GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
+		//GestureProvider = FindObjectOfType<GestureManager> ();
 
 		GestureProvider.OnGesture += OnGestureHandler;
 		Reset ();
@@ -41,6 +41,7 @@ public class Cannon : MonoBehaviour {
 
 
 	public void OnGestureHandler (PSMoveEvent ev) {
+
 		if(ev.EventType == EventType.PsMoveButtonPressed)
 		{
 			var hasGesture = CurrentGestures [((int) ev.ControllerId)-1] != EventType.None;
@@ -60,6 +61,7 @@ public class Cannon : MonoBehaviour {
 			CurrentGestures [((int) ev.ControllerId)-1] = ev.EventType;
 
 			NotificationManager.Instance.ShowMessage(ev.ControllerId + " : " + ev.EventType.ToString());
+
 			GestureManager.Instance.SetControllerLEDColor(ev.ControllerId, GesturesToColorsMap[ev.EventType]);
 			GestureManager.Instance.SetControllerRumble(ev.ControllerId, 0.15f, 50);
 
