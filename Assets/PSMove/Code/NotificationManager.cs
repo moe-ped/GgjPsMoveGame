@@ -40,7 +40,7 @@ public class NotificationManager : MonoBehaviour {
 		{
 			var msg = messages[i];
 			var pos = msg.transform.position;
-			pos.y += 0.1f;
+			pos.y += 1f;
 			msg.transform.position = pos;
 
 			if(pos.y >= 1000){

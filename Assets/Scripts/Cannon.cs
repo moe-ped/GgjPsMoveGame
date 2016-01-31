@@ -8,6 +8,8 @@ public class Cannon : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject CannonballPrefab;
+	[SerializeField]
+	private Animator Animator;
 
 	private IGestureProvider GestureProvider;
 
@@ -114,6 +116,7 @@ public class Cannon : MonoBehaviour {
 		cannonball.GetComponent<Cannonball> ().Elements = GesturesToElements(CurrentGestures);
 		Rigidbody2D rigidbody2D = cannonball.GetComponent<Rigidbody2D> ();
 		rigidbody2D.AddForce (transform.right*15, ForceMode2D.Impulse);
+		Animator.Play ("Attack");
 	}
 
 	private void Reset() {
