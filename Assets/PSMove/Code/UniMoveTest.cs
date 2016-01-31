@@ -110,7 +110,7 @@ public class UniMoveTest : MonoBehaviour
 				moveObj.SetLED(Color.white);
 
 
-				this.GetComponent<GestureManager>().AddController(moveObj);
+				FindObjectOfType<GestureManager>().AddController(moveObj);
 			}
 		}
 	}

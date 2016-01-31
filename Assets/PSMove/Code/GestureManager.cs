@@ -10,14 +10,13 @@ public class GestureManager : MonoBehaviour, IGestureProvider{
 	public Action<PSMoveEvent> OnGesture { get; set; }
 
 	public List<MoveController> Controllers{ get{
-
 			if(Application.platform != RuntimePlatform.OSXEditor) return null;
 			return _controllers;
 		}
 	}
 
 
-	List<MoveController> _controllers;
+	List<MoveController> _controllers = new List<MoveController>();
 
 	public void Awake(){
 		Instance = this;
@@ -26,7 +25,7 @@ public class GestureManager : MonoBehaviour, IGestureProvider{
 	public void AddController(MoveController controller){
 		if(Application.platform != RuntimePlatform.OSXEditor) return;
 		
-		Controllers.Add(controller);
+		_controllers.Add(controller);
 
 		controller.Controller.ControllerId = (ControllerId) Controllers.Count;
 		controller.Controller.OnEvent = OnControllerGestureHandler;
@@ -35,7 +34,7 @@ public class GestureManager : MonoBehaviour, IGestureProvider{
 	public void RemoveController(MoveController controller){
 		if(Application.platform != RuntimePlatform.OSXEditor) return;
 		
-		Controllers.Remove(controller);
+		_controllers.Remove(controller);
 	}
 
 	public void SetControllerLEDColor (ControllerId controllerId, Color color, float resetColorAfterTime = -1)
