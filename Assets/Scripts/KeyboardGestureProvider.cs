@@ -10,18 +10,7 @@ public class KeyboardGestureProvider : MonoBehaviour,IGestureProvider {
 		public KeyCode[] Gestures;
 	}
 
-	#region IGestureProvider implementation
-	public Action<PSMoveEvent> OnGesture {
-		get {
-			return _eventGestureMade;
-		}
-		set {
-			_eventGestureMade = value;
-		}
-	}
-	#endregion
-
-	private Action<PSMoveEvent> _eventGestureMade;
+	public Action<PSMoveEvent> OnGesture {get; set;}
 
 	// not actual controllers ...
 	[SerializeField]
