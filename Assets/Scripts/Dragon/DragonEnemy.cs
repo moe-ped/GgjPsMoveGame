@@ -16,6 +16,7 @@ public class DragonEnemy : MonoBehaviour {
 
 	public void HitWithElements (Element[] elements) {
 		if (ThatHurt (elements)) {
+			DragonSpawner.Instance.OnDragonKilled ();
 			StartCoroutine (DragonDied(gameObject));
 		}
 	}

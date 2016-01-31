@@ -2,27 +2,44 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
+public struct Level {
+	public int KillsForNextLevel;
+	public float SpawnCooldown;
+	public float DragonSpeed;
+	public float DragonSpeedRandomDeviation;
+}
+
 public class DragonSpawner : MonoBehaviour {
+
+	public static DragonSpawner Instance { get; private set;}
 
 	[SerializeField]
 	private GameObject DragonPrefab;
 	[SerializeField]
-	private float SpawnCooldown = 1;
-	[SerializeField]
-	private float DragonSpeed = 0.2f;
+	private Level[] LevelBalancingValues;
 	public float[] LanesY = new float[3];
+	public int CurrentLevel = 0;
+	private static int DragonsKilled = 0;
 
 	private List<Transform> Dragons = new List<Transform> ();
 
 	// Use this for initialization
 	void Start () {
-		// Test
+		Instance = this;
 		StartCoroutine(Co_SpawnDragons());
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//DestroyDragons ();
+	}
+
+	public void OnDragonKilled() {
+		DragonsKilled++;
+		if (DragonsKilled >= LevelBalancingValues [CurrentLevel].KillsForNextLevel) {
+			CurrentLevel++;
+		}
 	}
 
 	private void SpawnDragon () {
@@ -37,7 +54,7 @@ public class DragonSpawner : MonoBehaviour {
 			elements [i] = (Element)Random.Range (0, 3);
 		}
 		dragonAttack.Elements = elements;
-		moveAtConstantSpeed.velocity = Vector2.left * DragonSpeed;
+		moveAtConstantSpeed.velocity = Vector2.left * (LevelBalancingValues[CurrentLevel].DragonSpeed + Random.Range(-LevelBalancingValues[CurrentLevel].DragonSpeedRandomDeviation, LevelBalancingValues[CurrentLevel].DragonSpeedRandomDeviation));
 		//Dragons.Add (bodypartSpriteSelector.transform);
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Head, elements[0]);
 		bodypartSpriteSelector.SetBodyPart(BodyPartType.Body, elements[1]);
@@ -63,7 +80,7 @@ public class DragonSpawner : MonoBehaviour {
 	private IEnumerator Co_SpawnDragons () {
 		while (true) {
 			SpawnDragon ();
-			yield return new WaitForSeconds (SpawnCooldown);
+			yield return new WaitForSeconds (LevelBalancingValues[CurrentLevel].SpawnCooldown);
 		}
 	}
 
