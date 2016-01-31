@@ -15,6 +15,14 @@ public class GamePhaseManager : MonoBehaviour {
 
 	public List<GameObject> Overlays;
 
+	[SerializeField]
+	AudioClip slowmo_in;
+
+	[SerializeField]
+	AudioClip slowmo_out;
+
+	[SerializeField]
+	AudioClip spellReady;
 
 	// Use this for initialization
 	void Awake () {
@@ -34,14 +42,17 @@ public class GamePhaseManager : MonoBehaviour {
 		case GamePhase.Focus:
 			StartFocusFase ();
 			Overlays [0].SetActive (true);
+			AudioSource.PlayClipAtPoint(slowmo_in, gameObject.transform.position);
 			break;
 		case GamePhase.Cast:
 			// handle in cannon
 			Overlays [1].SetActive (true);
+
 			break;
 		case GamePhase.WaitForFire:
 			// handle in cannon
 			Overlays [2].SetActive (true);
+			AudioSource.PlayClipAtPoint(spellReady, gameObject.transform.position);
 			break;
 		case GamePhase.Fire:
 			// handle in cannonball
@@ -74,7 +85,6 @@ public class GamePhaseManager : MonoBehaviour {
 		GetGestureProvider ().OnGesture -= FocusPhaseGestureHandler;
 		playersThatShot.Clear ();
 		StartPhase (GamePhase.Cast);
-
 		Time.timeScale = 1f;
 	}
 
