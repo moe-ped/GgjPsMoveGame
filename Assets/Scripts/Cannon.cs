@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Cannon : MonoBehaviour {
 
+	public static Cannon Instance { get; private set; }
 	public const float TimeToShootTogether = 1.0f;
 
 	[SerializeField]
@@ -32,6 +33,7 @@ public class Cannon : MonoBehaviour {
 
 	// Test
 	void Start () {
+		Instance = this;
 		if(Application.platform == RuntimePlatform.OSXEditor){
 			GestureProvider = FindObjectOfType<GestureManager> ();
 		} else{

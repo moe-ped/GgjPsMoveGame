@@ -9,6 +9,9 @@ public class HealthManager : MonoBehaviour {
 	[SerializeField]
 	public GameObject[] Lives = new GameObject[5];
 
+	[SerializeField]
+	WHCameraRandomShaker shaker;
+
 	int livesCount;
 
 	// Use this for initialization
@@ -24,6 +27,7 @@ public class HealthManager : MonoBehaviour {
 
 	public void LoseLive() {
 		UpdateLiveUI();
+		shaker.doShake();
 
 	}
 
