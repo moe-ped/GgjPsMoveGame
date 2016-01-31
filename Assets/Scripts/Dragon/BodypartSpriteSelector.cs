@@ -105,7 +105,7 @@ public class BodypartSpriteSelector : MonoBehaviour {
 	IEnumerator DragonRoar() {
 		while (true) {
 			try {
-				AudioSource.PlayClipAtPoint(Roar,Head.position,0.4f);
+				AudioSource.PlayClipAtPoint(Roar,Head.position,0.2f);
 			}
 			catch (Exception ex) {
 				Debug.LogError ("lolz, " + ex);
