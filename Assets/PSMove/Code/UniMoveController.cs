@@ -142,7 +142,8 @@ public class UniMoveController : MonoBehaviour
 
 	public ControllerId ControllerId;
 
-	public int FrameHistoryCount = 10;
+	public int FrameHistoryCount = 40;
+	public int RequiredDiffForGesture = 30;
 
 	#region private instance variables
 
@@ -717,16 +718,16 @@ public class UniMoveController : MonoBehaviour
 
 		Vector3 orientDiff = curOrient - relevantOrient;
 
-		if(orientDiff.x > 0 && biggestDiffLeftRight > 50){
+		if(orientDiff.x > 0 && biggestDiffLeftRight > RequiredDiffForGesture){
 			MadeGesture(EventType.Right);
 		}
-		else if(orientDiff.x < 0 && biggestDiffLeftRight > 50){
+		else if(orientDiff.x < 0 && biggestDiffLeftRight > RequiredDiffForGesture){
 			MadeGesture(EventType.Left);
 		}
-		else if(orientDiff.y < 0 && biggestDiffUpDown > 50){
+		else if(orientDiff.y < 0 && biggestDiffUpDown > RequiredDiffForGesture){
 			MadeGesture(EventType.Up);
 		}
-		else if(orientDiff.y > 0 && biggestDiffUpDown > 40){
+		else if(orientDiff.y > 0 && biggestDiffUpDown > RequiredDiffForGesture){
 
 		//	Debug.Log(orientDiff);
 			//NotificationManager.Instance.ShowMessage("DOWN!");
