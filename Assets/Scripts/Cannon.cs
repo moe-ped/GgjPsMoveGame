@@ -66,7 +66,6 @@ public class Cannon : MonoBehaviour {
 			//NotificationManager.Instance.ShowMessage(ev.ControllerId + " : " + ev.EventType.ToString());
 
 			GestureManager.Instance.SetControllerLEDColor(ev.ControllerId, GesturesToColorsMap[ev.EventType]);
-			GestureManager.Instance.SetControllerRumble(ev.ControllerId, 0.15f, 50);
 
 			return;
 		}
@@ -74,6 +73,15 @@ public class Cannon : MonoBehaviour {
 
 	private void EnterWaitingToShootPhase()
 	{
+		try {
+			foreach (var controller in GestureManager.Instance.Controllers) {
+				GestureManager.Instance.SetControllerRumble (controller.Controller.ControllerId, 0.65f, 50);
+			}
+		}
+		catch(System.Exception ex) {
+			Debug.LogWarning (ex);
+		}
+
 		isInWaitingToShootPhase = true;
 		//TODO play sound, SHOOT MODE!!
 		NotificationManager.Instance.ShowMessage("Charge engaged!");

@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class HealthManager : MonoBehaviour {
 
 	public static HealthManager Instance;
 
 	[SerializeField]
-	int Lives = 5;
+	public GameObject[] Lives = new GameObject[5];
+
+	int livesCount;
 
 	// Use this for initialization
 	void Awake () {
 		CreateInstance();
+		livesCount = Lives.Length;
 	}
 
 	void CreateInstance() {
@@ -20,13 +24,15 @@ public class HealthManager : MonoBehaviour {
 
 	public void LoseLive() {
 		UpdateLiveUI();
-		Lives--;
+
 	}
 
 	void UpdateLiveUI() {
-		GameObject[] lives = GameObject.FindGameObjectsWithTag("Live");
-		if(lives.Length > 0) {
-			Destroy(lives[lives.Length-1]);
-		}
+		Destroy(Lives[livesCount-1]);
+		livesCount--;
+
+		if(livesCount == 0)
+			GameOverController.Instance.GameOver();
 	}
+		
 }
