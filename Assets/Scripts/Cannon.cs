@@ -95,7 +95,7 @@ public class Cannon : MonoBehaviour {
 
 		isInWaitingToShootPhase = true;
 		//TODO play sound, SHOOT MODE!!
-		NotificationManager.Instance.ShowMessage("Charge engaged!");
+		//NotificationManager.Instance.ShowMessage("Charge engaged!");
 		StartCoroutine(WaitingToShootPhase());
 
 	}
@@ -136,12 +136,12 @@ public class Cannon : MonoBehaviour {
 
 	private void FailedShoot(){
 		//TODO play sound, Ahwww
-		NotificationManager.Instance.ShowMessage("Failed shot!");
+		//NotificationManager.Instance.ShowMessage("Failed shot!");
 		GamePhaseManager.Instance.StartPhase (GamePhase.Focus);
 	}
 
 	private void Shoot () {
-		NotificationManager.Instance.ShowMessage("Nice shot!");
+		//NotificationManager.Instance.ShowMessage("Nice shot!");
 		GamePhaseManager.Instance.StartPhase (GamePhase.Fire);
 
 		

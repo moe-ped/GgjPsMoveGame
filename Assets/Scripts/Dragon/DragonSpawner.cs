@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct Level {
@@ -44,6 +45,8 @@ public class DragonSpawner : MonoBehaviour {
 		DragonsKilled++;
 		if (DragonsKilled >= LevelBalancingValues [CurrentLevel].KillsForNextLevel) {
 			CurrentLevel++;
+			GameObject.Find ("LevelText").GetComponent<Text> ().text = "Level: " + (CurrentLevel+1);
+			NotificationManager.Instance.ShowMessage ("Level up!");
 		}
 	}
 
