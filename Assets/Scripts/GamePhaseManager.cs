@@ -59,6 +59,7 @@ public class GamePhaseManager : MonoBehaviour {
 	void FocusPhaseGestureHandler(PSMoveEvent ev){
 		if(!playersThatShot.Contains(ev.ControllerId)){
 			playersThatShot.Add(ev.ControllerId);
+			GestureManager.Instance.SetControllerRumble (ev.ControllerId, 0.8f, 0.1f);
 		}
 	}
 
