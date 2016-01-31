@@ -26,6 +26,11 @@ public class Cannonball : MonoBehaviour {
 			dragon.HitWithElements (Elements);
 			DestroyParticleSystems ();
 			Destroy (gameObject);
+
+
+			foreach(var controller in GestureManager.Instance.Controllers){
+				GestureManager.Instance.SetControllerRumble(controller.Controller.ControllerId, 1.0f, 0.4f);
+			}
 		}
 	}
 
