@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Cannon : MonoBehaviour {
 
-	public const float TimeToShootTogether = 2.0f;
+	public const float TimeToShootTogether = 1.0f;
 
 	[SerializeField]
 	private GameObject CannonballPrefab;

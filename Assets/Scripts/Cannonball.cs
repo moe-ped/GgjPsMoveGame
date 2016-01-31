@@ -30,11 +30,15 @@ public class Cannonball : MonoBehaviour {
 	}
 
 	void SpawnParticles () {
+		try{
 		foreach (var element in _elements)
 		{
 			Transform particleSystem = ((GameObject)Instantiate (ParticleSystems[(int)element], transform.position, Quaternion.identity)).transform;
 			particleSystem.SetParent (transform);
 			SpawnedParticleSystems.Add (particleSystem);
+		}
+		} catch(UnityException e){
+			Debug.Log(e);
 		}
 	}
 
