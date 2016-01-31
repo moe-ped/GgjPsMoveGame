@@ -31,11 +31,17 @@ public class DragonSpawner : MonoBehaviour {
 		GameObject dragon = (GameObject)Instantiate (DragonPrefab, position, Quaternion.identity);
 		BodypartSpriteSelector bodypartSpriteSelector = dragon.GetComponent<BodypartSpriteSelector> ();
 		MoveAtConstantSpeed moveAtConstantSpeed = dragon.GetComponent<MoveAtConstantSpeed> ();
+		DragonAttack dragonAttack = dragon.GetComponent<DragonAttack> ();
+		Element[] elements = new Element[3];
+		for (int i = 0; i < elements.Length; i++) {
+			elements [i] = (Element)Random.Range (0, 3);
+		}
+		dragonAttack.Elements = elements;
 		moveAtConstantSpeed.velocity = Vector2.left * DragonSpeed;
 		//Dragons.Add (bodypartSpriteSelector.transform);
-		bodypartSpriteSelector.SetBodyPart(BodyPartType.Head, (Element)Random.Range(0, 3));
-		bodypartSpriteSelector.SetBodyPart(BodyPartType.Body, (Element)Random.Range(0, 3));
-		bodypartSpriteSelector.SetBodyPart(BodyPartType.Wings, (Element)Random.Range(0, 3));
+		bodypartSpriteSelector.SetBodyPart(BodyPartType.Head, elements[0]);
+		bodypartSpriteSelector.SetBodyPart(BodyPartType.Body, elements[1]);
+		bodypartSpriteSelector.SetBodyPart(BodyPartType.Wings, elements[2]);
 		bodypartSpriteSelector.SetRoarSound(Random.Range(0,4));
 		bodypartSpriteSelector.BeginRoaring();
 	}

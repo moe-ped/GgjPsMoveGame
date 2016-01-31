@@ -5,17 +5,54 @@ public class Cannon : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject CannonballPrefab;
+	[SerializeField]
+	private KeyboardGestureProvider GestureProvider;
+
+	private EventType[] Gestures = new EventType[3];
+	private bool AllGesturesMade {
+		get {
+			for (int i = 0; i < Gestures.Length; i++) {
+				if (Gestures [i] == EventType.None) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
 
 	// Test
-	/*void Update () {
-		if (Input.GetKeyDown (KeyCode.S)) {
-			Shoot ();
-		}
-	}*/
+	void Start () {
+		GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
+		GestureProvider.EventGestureMade += AddGesture;
+		ResetGestures ();
+	}
 
-	public void Shoot () {
+	public void AddGesture (EventType type, int controllerId) {
+		Gestures [controllerId] = type;
+		if (AllGesturesMade) {
+			Shoot ();
+			ResetGestures ();
+		}
+	}
+
+	private void Shoot () {
 		GameObject cannonball = (GameObject) Instantiate (CannonballPrefab, transform.position, transform.rotation);
+		cannonball.GetComponent<Cannonball> ().Elements = GesturesToElements(Gestures);
 		Rigidbody2D rigidbody2D = cannonball.GetComponent<Rigidbody2D> ();
 		rigidbody2D.AddForce (transform.right*15, ForceMode2D.Impulse);
+	}
+
+	private void ResetGestures() {
+		for (int i = 0; i < Gestures.Length; i++) {
+			Gestures [i] = EventType.None;
+		}
+	}
+
+	private Element[] GesturesToElements(EventType[] gestures) {
+		Element[] elements = new Element[gestures.Length];
+		for (int i=0; i<gestures.Length; i++) {
+			elements [i] = (Element)(int)gestures [i];
+		}
+		return elements;
 	}
 }

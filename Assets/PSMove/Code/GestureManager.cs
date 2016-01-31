@@ -71,7 +71,7 @@ public class GestureManager : MonoBehaviour, IGestureManager{
 }
 
 public enum ControllerId {Zero = 0, One = 1, Two = 2};
-public enum EventType {Left, Right, Up, PsMoveButtonPressed};
+public enum EventType {Left, Right, Up, PsMoveButtonPressed, None = -1};
 
 public class PSMoveEvent
 {

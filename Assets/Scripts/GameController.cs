@@ -104,7 +104,6 @@ public class GameController : MonoBehaviour {
 
 			if(seqeunceToMatch.Count == sequenceToMatch.Count) {
 				if(checkSeq()){
-					shootBall();
 					contolLight_img.color = Color.green;
 					StopCoroutine("inputCountdown5sec");
 					ResetStuff();
@@ -236,10 +235,4 @@ public class GameController : MonoBehaviour {
 
 		}
 	}
-
-
-	void shootBall() {
-		cannon.Shoot ();
-	}
-
 }

@@ -89,7 +89,13 @@ public class BodypartSpriteSelector : MonoBehaviour {
 	}
 
 	public void SetRoarSound(int index) {
-		Roar = RoarCollection[index];
+		// broken
+		try {
+			Roar = RoarCollection[index];
+		}
+		catch (Exception ex) {
+			Debug.LogError ("lolz, " + ex);
+		}
 	}
 
 	public void BeginRoaring() {
@@ -98,7 +104,12 @@ public class BodypartSpriteSelector : MonoBehaviour {
 
 	IEnumerator DragonRoar() {
 		while (true) {
-			AudioSource.PlayClipAtPoint(Roar,Head.position);
+			try {
+				AudioSource.PlayClipAtPoint(Roar,Head.position);
+			}
+			catch (Exception ex) {
+				Debug.LogError ("lolz, " + ex);
+			}
 			yield return new WaitForSeconds(UnityEngine.Random.Range(3.5f, 7f));
 		}
 	}
