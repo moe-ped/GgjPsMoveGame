@@ -105,12 +105,12 @@ public class BodypartSpriteSelector : MonoBehaviour {
 	IEnumerator DragonRoar() {
 		while (true) {
 			try {
-				AudioSource.PlayClipAtPoint(Roar,Head.position);
+				AudioSource.PlayClipAtPoint(Roar,Head.position,0.2f);
 			}
 			catch (Exception ex) {
 				Debug.LogError ("lolz, " + ex);
 			}
-			yield return new WaitForSeconds(UnityEngine.Random.Range(3.5f, 7f));
+			yield return new WaitForSeconds(UnityEngine.Random.Range(5.5f, 8f));
 		}
 	}
 }

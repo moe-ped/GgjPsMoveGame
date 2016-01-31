@@ -12,6 +12,9 @@ public class HealthManager : MonoBehaviour {
 	[SerializeField]
 	WHCameraRandomShaker shaker;
 
+	[SerializeField]
+	AudioClip[] ouchSounds;
+
 	int livesCount;
 
 	// Use this for initialization
@@ -28,6 +31,7 @@ public class HealthManager : MonoBehaviour {
 	public void LoseLive() {
 		UpdateLiveUI();
 		shaker.doShake();
+		AudioSource.PlayClipAtPoint(ouchSounds[Random.Range(0,ouchSounds.Length)], transform.position, 1f);
 	}
 
 	void UpdateLiveUI() {
