@@ -18,18 +18,36 @@ public class ApprenticeAura : MonoBehaviour {
 			GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
 		}
 
-		GestureProvider.OnGesture += UpdateAura;
+		GestureProvider.OnGesture += OnAuraChanged;
 	}
 
 	// NOTE: not using ev
-	void UpdateAura (PSMoveEvent ev) {
+	private void OnAuraChanged (PSMoveEvent ev) {
+		ExecuteDelayed (UpdateAura, 0.1f);
+	}
+
+	private void UpdateAura () {
 		int activeAura = (int)Cannon.Instance.CurrentGestures [PlayerId];
-		if (activeAura > 2) {
+		if (activeAura > 2 || activeAura < 0) {
+			foreach (var aura in AuraEffects) {
+				aura.gameObject.SetActive (false);
+			}
 			return;
 		}
-		foreach (var aura in AuraEffects) {
-			aura.gameObject.SetActive (false);
+		if (!AuraEffects [activeAura].gameObject.activeSelf) {
+			foreach (var aura in AuraEffects) {
+				aura.gameObject.SetActive (false);
+			}
+			AuraEffects [activeAura].gameObject.SetActive (true);
 		}
-		AuraEffects [activeAura].gameObject.SetActive (true);
+	}
+
+	private void ExecuteDelayed (System.Action action, float delay) {
+		StartCoroutine (Co_ExecuteDelayed (action, delay));
+	}
+
+	private IEnumerator Co_ExecuteDelayed (System.Action action, float delay) {
+		yield return new WaitForSeconds (delay);
+		action ();
 	}
 }
