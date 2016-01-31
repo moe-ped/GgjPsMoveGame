@@ -5,12 +5,15 @@ using System.Collections.Generic;
 public class Cannon : MonoBehaviour {
 
 	public static Cannon Instance { get; private set; }
-	public const float TimeToShootTogether = 1.0f;
+	public const float TimeToShootTogether = 1.5f;
 
 	[SerializeField]
 	private GameObject CannonballPrefab;
 	[SerializeField]
 	private Animator Animator;
+
+	[SerializeField]
+	private AudioClip fireSpellSound;
 
 	private IGestureProvider GestureProvider;
 
@@ -59,6 +62,7 @@ public class Cannon : MonoBehaviour {
 				if (hasGesture) {
 					if (playersThatShot.Find (x => x == ev.ControllerId) != null) {
 						playersThatShot.Add (ev.ControllerId);
+						GestureManager.Instance.SetControllerRumble (ev.ControllerId, 0.8f, 0.1f);
 					}
 
 					if (!isInWaitingToShootPhase) {
@@ -95,7 +99,7 @@ public class Cannon : MonoBehaviour {
 
 		isInWaitingToShootPhase = true;
 		//TODO play sound, SHOOT MODE!!
-		NotificationManager.Instance.ShowMessage("Charge engaged!");
+		//NotificationManager.Instance.ShowMessage("Charge engaged!");
 		StartCoroutine(WaitingToShootPhase());
 
 	}
@@ -136,17 +140,21 @@ public class Cannon : MonoBehaviour {
 
 	private void FailedShoot(){
 		//TODO play sound, Ahwww
-		NotificationManager.Instance.ShowMessage("Failed shot!");
+		//NotificationManager.Instance.ShowMessage("Failed shot!");
 		GamePhaseManager.Instance.StartPhase (GamePhase.Focus);
 	}
 
 	private void Shoot () {
-		NotificationManager.Instance.ShowMessage("Nice shot!");
+		//NotificationManager.Instance.ShowMessage("Nice shot!");
 		GamePhaseManager.Instance.StartPhase (GamePhase.Fire);
 
 		
 		GameObject cannonball = (GameObject) Instantiate (CannonballPrefab, transform.position, transform.rotation);
 		cannonball.GetComponent<Cannonball> ().Elements = GesturesToElements(CurrentGestures);
+
+		//add fire sound
+		AudioSource.PlayClipAtPoint(fireSpellSound, cannonball.transform.position);
+
 		Rigidbody2D rigidbody2D = cannonball.GetComponent<Rigidbody2D> ();
 		rigidbody2D.AddForce (transform.right*15, ForceMode2D.Impulse);
 		Animator.Play ("Attack");

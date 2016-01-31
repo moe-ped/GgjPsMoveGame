@@ -98,19 +98,7 @@ public class BodypartSpriteSelector : MonoBehaviour {
 		}
 	}
 
-	public void BeginRoaring() {
-		StartCoroutine("DragonRoar");
-	}
-
-	IEnumerator DragonRoar() {
-		while (true) {
-			try {
-				AudioSource.PlayClipAtPoint(Roar,Head.position);
-			}
-			catch (Exception ex) {
-				Debug.LogError ("lolz, " + ex);
-			}
-			yield return new WaitForSeconds(UnityEngine.Random.Range(3.5f, 7f));
-		}
+	public void DragonRoar() {
+		AudioSource.PlayClipAtPoint(Roar,Head.position,0.2f);
 	}
 }
