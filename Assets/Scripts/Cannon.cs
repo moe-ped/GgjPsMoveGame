@@ -12,6 +12,9 @@ public class Cannon : MonoBehaviour {
 	[SerializeField]
 	private Animator Animator;
 
+	[SerializeField]
+	private AudioClip fireSpellSound;
+
 	private IGestureProvider GestureProvider;
 
 	public EventType[] CurrentGestures = new EventType[3];
@@ -148,6 +151,10 @@ public class Cannon : MonoBehaviour {
 		
 		GameObject cannonball = (GameObject) Instantiate (CannonballPrefab, transform.position, transform.rotation);
 		cannonball.GetComponent<Cannonball> ().Elements = GesturesToElements(CurrentGestures);
+
+		//add fire sound
+		AudioSource.PlayClipAtPoint(fireSpellSound, cannonball.transform.position);
+
 		Rigidbody2D rigidbody2D = cannonball.GetComponent<Rigidbody2D> ();
 		rigidbody2D.AddForce (transform.right*15, ForceMode2D.Impulse);
 		Animator.Play ("Attack");
