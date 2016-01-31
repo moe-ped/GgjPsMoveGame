@@ -108,9 +108,10 @@ public class UniMoveTest : MonoBehaviour
 				moveObj.Controller = move;
 				moveObjs.Add(moveObj);
 				moveObj.SetLED(Color.white);
+				//moveObj.transform.localPosition  = Vector3.zero;
 
-
-				this.GetComponent<GestureManager>().AddController(moveObj);
+			//	moveObj.transform.SetParent(this.transform);
+				FindObjectOfType<GestureManager>().AddController(moveObj);
 			}
 		}
 	}

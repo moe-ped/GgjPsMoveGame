@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Cannonball : MonoBehaviour {
 
@@ -26,15 +27,24 @@ public class Cannonball : MonoBehaviour {
 			dragon.HitWithElements (Elements);
 			DestroyParticleSystems ();
 			Destroy (gameObject);
+
+
+			foreach(var controller in GestureManager.Instance.Controllers){
+				GestureManager.Instance.SetControllerRumble(controller.Controller.ControllerId, 1.0f, 0.4f);
+			}
 		}
 	}
 
 	void SpawnParticles () {
+		try{
 		foreach (var element in _elements)
 		{
 			Transform particleSystem = ((GameObject)Instantiate (ParticleSystems[(int)element], transform.position, Quaternion.identity)).transform;
 			particleSystem.SetParent (transform);
 			SpawnedParticleSystems.Add (particleSystem);
+		}
+		} catch(Exception e){
+			Debug.Log(e);
 		}
 	}
 

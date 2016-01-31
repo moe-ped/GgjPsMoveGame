@@ -18,12 +18,14 @@ public class DragonSpawner : MonoBehaviour {
 	private GameObject DragonPrefab;
 	[SerializeField]
 	private Level[] LevelBalancingValues;
-	public float[] LanesY = new float[3];
 	public int CurrentLevel = 0;
 	private static int DragonsKilled = 0;
 
 	private List<Transform> Dragons = new List<Transform> ();
 
+	public Transform[] StartPositions;
+	public Transform[] EndPositions;
+	
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -33,6 +35,8 @@ public class DragonSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//DestroyDragons ();
+
+
 	}
 
 	public void OnDragonKilled() {
@@ -43,9 +47,9 @@ public class DragonSpawner : MonoBehaviour {
 	}
 
 	private void SpawnDragon () {
-		float laneY = LanesY[Random.Range(0, 3)];
-		Vector3 position = transform.position + Vector3.up * laneY;
-		GameObject dragon = (GameObject)Instantiate (DragonPrefab, position, Quaternion.identity);
+		int lane = Random.Range(0, 3);
+		Vector3 startPosition = StartPositions[lane].position;
+		GameObject dragon = (GameObject)Instantiate (DragonPrefab, startPosition, Quaternion.identity);
 		BodypartSpriteSelector bodypartSpriteSelector = dragon.GetComponent<BodypartSpriteSelector> ();
 		MoveAtConstantSpeed moveAtConstantSpeed = dragon.GetComponent<MoveAtConstantSpeed> ();
 		DragonEnemy dragonAttack = dragon.GetComponent<DragonEnemy> ();
@@ -84,13 +88,11 @@ public class DragonSpawner : MonoBehaviour {
 		}
 	}
 
-
-
-	void OnDrawGizmos() {
-		Gizmos.color = Color.green;
-		foreach (var laneY in LanesY) {
-			Vector3 position = transform.position + Vector3.up * laneY;
-			Gizmos.DrawLine (position, position + Vector3.left * 10);
-		}
-	}
+	//void OnDrawGizmos() {
+	//	Gizmos.color = Color.green;
+	//	foreach (var laneY in lan) {
+	//		Vector3 position = transform.position + Vector3.up * laneY;
+	//		Gizmos.DrawLine (position, position + Vector3.left * 10);
+	//	}
+	//}
 }
