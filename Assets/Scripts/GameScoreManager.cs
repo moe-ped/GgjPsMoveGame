@@ -7,11 +7,8 @@ public class GameScoreManager : MonoBehaviour {
 	public static GameScoreManager Instance;
 
 	public Text ScoreLabel;
-	public Text LiveLabel;
 
 	public int Score;
-
-	public int Lives = 5;
 
 	// Use this for initialization
 	void Awake () {
@@ -24,14 +21,4 @@ public class GameScoreManager : MonoBehaviour {
 		ScoreLabel.text = Score + " dragons slain!";
 	}
 
-	public void RemoveLive(){
-		Lives++;
-		
-		LiveLabel.text = Lives + " left!";
-
-		if(Lives== 0){
-
-			Application.LoadLevel("YouLostScene");
-		}
-	}
 }
