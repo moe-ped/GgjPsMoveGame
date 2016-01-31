@@ -44,7 +44,7 @@ public class Cannon : MonoBehaviour {
 
 		if(ev.EventType == EventType.PsMoveButtonPressed)
 		{
-			var hasGesture = CurrentGestures [((int) ev.ControllerId)-1] != EventType.None;
+			var hasGesture = CurrentGestures [((int) ev.ControllerId)] != EventType.None;
 
 			if(hasGesture){
 				if(playersThatShot.Find(x => x == ev.ControllerId) != null){
@@ -58,7 +58,7 @@ public class Cannon : MonoBehaviour {
 		}
 
 		if(ev.EventType == EventType.Left || ev.EventType == EventType.Right || ev.EventType == EventType.Up){
-			CurrentGestures [((int) ev.ControllerId)-1] = ev.EventType;
+			CurrentGestures [((int) ev.ControllerId)] = ev.EventType;
 
 			NotificationManager.Instance.ShowMessage(ev.ControllerId + " : " + ev.EventType.ToString());
 
