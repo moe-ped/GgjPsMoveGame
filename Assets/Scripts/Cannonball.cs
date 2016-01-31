@@ -7,6 +7,8 @@ public class Cannonball : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject[] ParticleSystems;
+	[SerializeField]
+	private Transform[] SpawnPositions = new Transform[3];
 	private List<Transform> SpawnedParticleSystems = new List<Transform>();
 
 	private Element[] _elements;
@@ -55,13 +57,16 @@ public class Cannonball : MonoBehaviour {
 
 	void SpawnParticles () {
 		try{
-		foreach (var element in _elements)
-		{
-			Transform particleSystem = ((GameObject)Instantiate (ParticleSystems[(int)element], transform.position, Quaternion.identity)).transform;
-			particleSystem.SetParent (transform);
-			SpawnedParticleSystems.Add (particleSystem);
-		}
-		} catch(Exception e){
+			int i = 0;
+			foreach (var element in _elements)
+			{
+				Transform particleSystem = ((GameObject)Instantiate (ParticleSystems[(int)element], SpawnPositions[i].position, Quaternion.identity)).transform;
+				particleSystem.SetParent (SpawnPositions[i]);
+				SpawnedParticleSystems.Add (particleSystem);
+				i++;
+			}
+		} 
+		catch(Exception e){
 			Debug.Log(e);
 		}
 	}
