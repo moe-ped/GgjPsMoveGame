@@ -25,6 +25,8 @@ public class DragonSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//DestroyDragons ();
+
+
 	}
 
 	private void SpawnDragon () {
@@ -68,8 +70,6 @@ public class DragonSpawner : MonoBehaviour {
 			yield return new WaitForSeconds (SpawnCooldown);
 		}
 	}
-
-
 
 	//void OnDrawGizmos() {
 	//	Gizmos.color = Color.green;

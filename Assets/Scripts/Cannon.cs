@@ -47,7 +47,7 @@ public class Cannon : MonoBehaviour {
 
 		if(ev.EventType == EventType.PsMoveButtonPressed)
 		{
-			var hasGesture = CurrentGestures [((int) ev.ControllerId)] != EventType.None;
+			var hasGesture = CurrentGestures [((int) ev.ControllerId)-1] != EventType.None;
 
 			if(hasGesture){
 				if(playersThatShot.Find(x => x == ev.ControllerId) != null){
@@ -61,9 +61,9 @@ public class Cannon : MonoBehaviour {
 		}
 
 		if(ev.EventType == EventType.Left || ev.EventType == EventType.Right || ev.EventType == EventType.Up){
-			CurrentGestures [((int) ev.ControllerId)] = ev.EventType;
+			CurrentGestures [((int) ev.ControllerId)-1] = ev.EventType;
 
-			NotificationManager.Instance.ShowMessage(ev.ControllerId + " : " + ev.EventType.ToString());
+			//NotificationManager.Instance.ShowMessage(ev.ControllerId + " : " + ev.EventType.ToString());
 
 			GestureManager.Instance.SetControllerLEDColor(ev.ControllerId, GesturesToColorsMap[ev.EventType]);
 			GestureManager.Instance.SetControllerRumble(ev.ControllerId, 0.15f, 50);
@@ -76,7 +76,7 @@ public class Cannon : MonoBehaviour {
 	{
 		isInWaitingToShootPhase = true;
 		//TODO play sound, SHOOT MODE!!
-		NotificationManager.Instance.ShowMessage("ALL SHOOT!");
+		NotificationManager.Instance.ShowMessage("Charge engaged!");
 		StartCoroutine(WaitingToShootPhase());
 
 	}
