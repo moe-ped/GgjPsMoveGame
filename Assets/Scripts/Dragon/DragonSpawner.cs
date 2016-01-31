@@ -57,6 +57,9 @@ public class DragonSpawner : MonoBehaviour {
 		Element[] elements = new Element[3];
 		for (int i = 0; i < elements.Length; i++) {
 			elements [i] = (Element)Random.Range (0, 3);
+			if (i + 1 > LevelBalancingValues [CurrentLevel].Colors) {
+				elements [i] = elements [i - 1];
+			}
 		}
 		dragonAttack.Elements = elements;
 		moveAtConstantSpeed.velocity = ( EndPositions[lane].position - startPosition).normalized * (LevelBalancingValues[CurrentLevel].DragonSpeed + Random.Range(-LevelBalancingValues[CurrentLevel].DragonSpeedRandomDeviation, LevelBalancingValues[CurrentLevel].DragonSpeedRandomDeviation));
