@@ -28,12 +28,14 @@ public class DragonEnemy : MonoBehaviour {
 
 	private bool ThatHurt(Element[] elements) {
 		List<Element> elementList = new List<Element> (elements);
+		int rightElements = 0;
 		foreach (var ele in Elements) {
-			if (!elementList.Contains(ele)) {
-				return false;
+			if (elementList.Contains(ele)) {
+				elementList.Remove (ele);
+				rightElements++;
 			}
 		}
-		return true;
+		return rightElements == 3;
 	}
 		
 	IEnumerator DragonDied(GameObject dragon) {
