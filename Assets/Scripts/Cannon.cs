@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Cannon : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject CannonballPrefab;
-	[SerializeField]
-	private KeyboardGestureProvider GestureProvider;
+
+
+	private IGestureProvider GestureProvider;
 
 	private EventType[] Gestures = new EventType[3];
 	private bool AllGesturesMade {
@@ -22,16 +23,20 @@ public class Cannon : MonoBehaviour {
 
 	// Test
 	void Start () {
-		GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
-		GestureProvider.EventGestureMade += AddGesture;
+		//GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
+		GestureProvider = FindObjectOfType<GestureManager> ();
+
+		GestureProvider.OnGesture += AddGesture;
 		ResetGestures ();
 	}
 
-	public void AddGesture (EventType type, int controllerId) {
-		Gestures [controllerId] = type;
-		if (AllGesturesMade) {
-			Shoot ();
-			ResetGestures ();
+	public void AddGesture (PSMoveEvent ev) {
+		if(ev.EventType == EventType.Left || ev.EventType == EventType.Right || ev.EventType == EventType.Up){
+			Gestures [(int) ev.ControllerId] = ev.EventType;
+			if (AllGesturesMade) {
+				Shoot ();
+				ResetGestures ();
+			}
 		}
 	}
 

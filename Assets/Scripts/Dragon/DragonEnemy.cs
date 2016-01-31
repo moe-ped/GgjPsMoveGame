@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 // And die and stuff ... -> consider renaming
-public class DragonAttack : MonoBehaviour {
+public class DragonEnemy : MonoBehaviour {
 
 	public Element[] Elements;
 
@@ -14,8 +14,7 @@ public class DragonAttack : MonoBehaviour {
 		}
 	}
 
-	// Name is stupid
-	public void GetHit (Element[] elements) {
+	public void HitWithElements (Element[] elements) {
 		if (ThatHurt (elements)) {
 			StartCoroutine (DragonDied(gameObject));
 		}

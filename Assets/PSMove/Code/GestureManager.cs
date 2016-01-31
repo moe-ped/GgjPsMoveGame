@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class GestureManager : MonoBehaviour, IGestureManager{
+public class GestureManager : MonoBehaviour, IGestureManager, IGestureProvider{
 		
 	public static IGestureManager Instance;
 

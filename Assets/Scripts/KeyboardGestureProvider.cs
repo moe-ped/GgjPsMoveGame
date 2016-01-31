@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
-public class KeyboardGestureProvider : MonoBehaviour, IGestureProvider {
+
+public class KeyboardGestureProvider : MonoBehaviour,IGestureProvider {
 
 	[Serializable]
 	public struct Controller {
@@ -10,7 +11,7 @@ public class KeyboardGestureProvider : MonoBehaviour, IGestureProvider {
 	}
 
 	#region IGestureProvider implementation
-	public Action<EventType, int> EventGestureMade {
+	public Action<PSMoveEvent> OnGesture {
 		get {
 			return _eventGestureMade;
 		}
@@ -20,7 +21,7 @@ public class KeyboardGestureProvider : MonoBehaviour, IGestureProvider {
 	}
 	#endregion
 
-	private Action<EventType, int> _eventGestureMade;
+	private Action<PSMoveEvent> _eventGestureMade;
 
 	// not actual controllers ...
 	[SerializeField]
@@ -35,7 +36,7 @@ public class KeyboardGestureProvider : MonoBehaviour, IGestureProvider {
 		for (int c = 0; c < Controllers.Length; c++) {
 			for (int g = 0; g < Controllers[c].Gestures.Length; g++) {
 				if (Input.GetKeyUp (Controllers[c].Gestures [g])) {
-					EventGestureMade((EventType)g, c);
+					OnGesture( new PSMoveEvent() { EventType = (EventType) g, ControllerId = (ControllerId) c});
 				}
 			}
 		}

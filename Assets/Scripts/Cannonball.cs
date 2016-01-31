@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -21,8 +21,8 @@ public class Cannonball : MonoBehaviour {
 
 	void OnCollisionEnter2D (Collision2D other) {
 		if (other.gameObject.tag == "Enemy") {
-			var dragon = other.gameObject.GetComponent<DragonAttack> ();
-			dragon.GetHit (Elements);
+			var dragon = other.gameObject.GetComponent<DragonEnemy> ();
+			dragon.HitWithElements (Elements);
 			DestroyParticleSystems ();
 			Destroy (gameObject);
 		}

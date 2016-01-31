@@ -195,41 +195,28 @@ public class GameController : MonoBehaviour {
 		switch (i) {
 		case 0:
 			return "W ";
-			break;
 		case 1:
 			return "S ";
-			break;
 		case 2:
 			return "A ";
-			break;
 		case 3:
 			return "D ";
-			break;
 		case 4:
 			return "Z ";
-			break;
 		case 5:
 			return "H ";
-			break;
 		case 6:
 			return "G ";
-			break;
 		case 7:
 			return "J ";
-			break;
 		case 8:
 			return "Up ";
-			break;
 		case 9:
 			return "Down ";
-			break;
 		case 10:
 			return "Left ";
-			break;
 		case 11:
 			return "Right ";
-			break;
-
 		default: 
 			return "";
 
