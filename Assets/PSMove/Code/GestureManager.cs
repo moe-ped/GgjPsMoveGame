@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ public class GestureManager : MonoBehaviour, IGestureManager{
 		
 	public static IGestureManager Instance;
 
-	public Action<GestureEvent> OnGesture { get; set; }
+	public Action<PSMoveEvent> OnGesture { get; set; }
 
 	List<MoveController> controllers = new List<MoveController>();
 
@@ -19,25 +19,32 @@ public class GestureManager : MonoBehaviour, IGestureManager{
 		controllers.Add(controller);
 
 		controller.Controller.ControllerId = (ControllerId) controllers.Count;
-		controller.Controller.OnGesture = OnControllerGestureHandler;
+		controller.Controller.OnEvent = OnControllerGestureHandler;
 	}
 
 	public void RemoveController(MoveController controller){
 		controllers.Remove(controller);
 	}
 
-	public void SetControllerLEDColor (ControllerId controllerId, Color color)
+	public void SetControllerLEDColor (ControllerId controllerId, Color color, float resetColorAfterTime = -1)
 	{
 		GetControllerById(controllerId).SetLED(color);
 		GetControllerById(controllerId).Controller.SetLED(color);
 
-		StartCoroutine(ResetColorAfterShortTime(controllerId));
+		if(resetColorAfterTime != -1){
+			StartCoroutine(ResetColorAfterShortTime(controllerId));
+		}
+	}
+
+	public void StopControllerRumble(ControllerId controllerId){
+		GetControllerById(controllerId).Controller.StopConstantRumbleIfActive();
 	}
 
 	public void SetControllerRumble (ControllerId controllerId, float rumbleIntensity, float rumbleDuration = 0.7f)
 	{
-		if(rumbleDuration != -1){
-			StartCoroutine(DoRumble(controllerId, rumbleIntensity, rumbleDuration));
+		if(rumbleDuration != -1)
+		{
+			GetControllerById(controllerId).Controller.LongerRumble(rumbleIntensity, rumbleDuration);
 		} 
 		else{
 			GetControllerById(controllerId).Controller.SetRumble(rumbleIntensity);
@@ -50,9 +57,9 @@ public class GestureManager : MonoBehaviour, IGestureManager{
 		GetControllerById(id).Controller.SetLED(Color.white);
 	}
 
-	private void OnControllerGestureHandler(ControllerId id, GestureType gesture){
+	private void OnControllerGestureHandler(ControllerId id, EventType gesture){
 		if(OnGesture != null){
-			OnGesture(new GestureEvent() { GestureType = gesture, ControllerId = id});
+			OnGesture(new PSMoveEvent() { EventType = gesture, ControllerId = id, Controller = GetControllerById(id)});
 		}
 	}
 
@@ -60,29 +67,23 @@ public class GestureManager : MonoBehaviour, IGestureManager{
 		return this.controllers.Find(x => x.Controller.ControllerId == id);
 	}
 
-	private IEnumerator DoRumble(ControllerId controllerId, float intensity, float duration){
-		float totalTime = 0.0f;
-		while(totalTime  < duration)
-		{
-			GetControllerById(controllerId).Controller.SetRumble(intensity);
-			yield return new WaitForEndOfFrame();
-			totalTime += Time.deltaTime;
-		}
-	}
+
 }
 
 public enum ControllerId {Zero = 0, One = 1, Two = 2};
-public enum GestureType {Left, Right, Up};
+public enum EventType {Left, Right, Up, PsMoveButtonPressed};
 
-public class GestureEvent
+public class PSMoveEvent
 {
+	public MoveController Controller;
 	public ControllerId ControllerId;
-	public GestureType GestureType;
+	public EventType EventType;
 }
 
 public interface IGestureManager  {
-	Action<GestureEvent> OnGesture {get; set;}
-	void SetControllerLEDColor(ControllerId controllerId, Color color);
+	Action<PSMoveEvent> OnGesture {get; set;}
+	void SetControllerLEDColor(ControllerId controllerId, Color color, float resetColorAfterTime = -1);
 	/* rumble 0-1 */
 	void SetControllerRumble(ControllerId controllerId, float rumbleIntensity, float rumbleDuration = -1);
+	void StopControllerRumble(ControllerId controllerId);
 }

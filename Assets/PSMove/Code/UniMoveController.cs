@@ -59,6 +59,7 @@ using System;
 using UnityEngine;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Collections;
 
 #region enums and structs
 
@@ -137,7 +138,7 @@ class MovementItem{
 
 public class UniMoveController : MonoBehaviour
 {
-	public Action<ControllerId, GestureType> OnGesture;
+	public Action<ControllerId, EventType> OnEvent;
 
 	public ControllerId ControllerId;
 
@@ -253,11 +254,45 @@ public class UniMoveController : MonoBehaviour
 		get { return this.updateRate; }
 		set { updateRate = Math.Max(value, MIN_UPDATE_RATE); }  // Clamp negative values up to 0
 	}
+
+	public void StopConstantRumbleIfActive(){
+		if(currentRumble != null){
+			StopCoroutine(currentRumble);
+			currentRumble = null;
+			DontDoRumble = false;
+		}
+	}
+
+	Coroutine currentRumble;
+
+
+	public void LongerRumble(float intensity, float duration){
+		StopConstantRumbleIfActive();
+		currentRumble = StartCoroutine(DoRumble(intensity, duration));
+	}
+
+	public IEnumerator DoRumble(float intensity, float duration){
+
+		float totalTime = 0.0f;
+		DontDoRumble = true;
+		while(totalTime  < duration)
+		{
+			SetRumble(intensity);
+			yield return new WaitForEndOfFrame();
+			totalTime += Time.deltaTime;
+		}
+		DontDoRumble = false;
+	}
 	
 	void Update()
 	{
 		if (disconnected) return;
-		
+
+		// Set the rumble based on how much the trigger is down
+		if(!DontDoRumble)
+			SetRumble(Trigger);
+
+
 		// we want to update the previous buttons outside the update restriction so,
 		// we only get one button event pr. unity update frame
 		prevButtons = currentButtons;
@@ -299,6 +334,14 @@ public class UniMoveController : MonoBehaviour
 			OnControllerDisconnected(this, new EventArgs());
 			Disconnect();
 		}
+
+
+		if(GetButtonDown(PSMoveButton.Move)) {
+			if(OnEvent != null){
+				OnEvent(ControllerId, EventType.PsMoveButtonPressed);
+			}
+
+		}
 	}
 	
 	void OnApplicationQuit()
@@ -334,6 +377,8 @@ public class UniMoveController : MonoBehaviour
 		
 		return ((prevButtons & (uint)b) != 0) &&  ((currentButtons & (uint)b) == 0);
 	}
+
+	public bool DontDoRumble = false;
 	
 	/// <summary>
 	/// Disconnect the controller
@@ -514,6 +559,7 @@ public class UniMoveController : MonoBehaviour
 	/// </summary>
 	private void ProcessData()
 	{
+
 		trigger = ((int)psmove_get_trigger(handle)) / 255f;
 		
 		int x = 0, y = 0, z = 0;
@@ -672,19 +718,20 @@ public class UniMoveController : MonoBehaviour
 		Vector3 orientDiff = curOrient - relevantOrient;
 
 		if(orientDiff.x > 0 && biggestDiffLeftRight > 50){
-			MadeGesture(GestureType.Right);
+			MadeGesture(EventType.Right);
 		}
 		else if(orientDiff.x < 0 && biggestDiffLeftRight > 50){
-			MadeGesture(GestureType.Left);
+			MadeGesture(EventType.Left);
 		}
 		else if(orientDiff.y < 0 && biggestDiffUpDown > 50){
-			MadeGesture(GestureType.Up);
+			MadeGesture(EventType.Up);
 		}
 		else if(orientDiff.y > 0 && biggestDiffUpDown > 40){
 
 		//	Debug.Log(orientDiff);
 			//NotificationManager.Instance.ShowMessage("DOWN!");
 			//Debug.LogWarning("DOWN!");
+		} else{
 		}
 
 		//Debug.LogWarning("Biggest diff left right: " + biggestDiffLeftRight);
@@ -698,15 +745,15 @@ public class UniMoveController : MonoBehaviour
 
 	Vector2 lastOrient = Vector2.zero;
 
-	private void MadeGesture(GestureType gesture){
-		Debug.LogWarning("Gesture! " + gesture.ToString());
+	private void MadeGesture(EventType gesture){
+		//Debug.LogWarning("Gesture! " + gesture.ToString());
 		//NotificationManager.Instance.ShowMessage(gesture.ToString());
 		makingGesture = false;
 		waitingToLetGoAfterMakingGesture = true;
 
-		LogHistory();
+		//LogHistory();
 		ResetHistory();
-		OnGesture(this.ControllerId, gesture);
+		OnEvent(this.ControllerId, gesture);
 	}
 
 	void LogHistory(){

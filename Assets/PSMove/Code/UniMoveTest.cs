@@ -136,10 +136,10 @@ public class UniMoveTest : MonoBehaviour
 			}
 
 			// Change the colors of the LEDs based on which button has just been pressed:
-			if (move.GetButtonDown(PSMoveButton.Circle))		{moveObj.SetLED(Color.cyan);move.SetLED(Color.cyan);}
-			else if(move.GetButtonDown(PSMoveButton.Cross)) 	{moveObj.SetLED(Color.red);move.SetLED(Color.red);}
-			else if(move.GetButtonDown(PSMoveButton.Square)) 	{moveObj.SetLED(Color.yellow);move.SetLED(Color.yellow);}
-			else if(move.GetButtonDown(PSMoveButton.Triangle)) 	{moveObj.SetLED(Color.magenta);move.SetLED(Color.magenta);}
+			//if (move.GetButtonDown(PSMoveButton.Circle))		{moveObj.SetLED(Color.cyan);move.SetLED(Color.cyan);}
+			//else if(move.GetButtonDown(PSMoveButton.Cross)) 	{moveObj.SetLED(Color.red);move.SetLED(Color.red);}
+			//else if(move.GetButtonDown(PSMoveButton.Square)) 	{moveObj.SetLED(Color.yellow);move.SetLED(Color.yellow);}
+			//else if(move.GetButtonDown(PSMoveButton.Triangle)) 	{moveObj.SetLED(Color.magenta);move.SetLED(Color.magenta);}
 
 			// On pressing the move button we reset the orientation as well.
 			// Remember to keep the controller leveled and pointing at the screen
@@ -150,8 +150,7 @@ public class UniMoveTest : MonoBehaviour
 				move.SetLED(Color.black);
 			}
 
-			// Set the rumble based on how much the trigger is down
-			move.SetRumble(move.Trigger);
+
 			moveObj.gameObject.transform.localRotation = move.Orientation;
 			i++;
 		}

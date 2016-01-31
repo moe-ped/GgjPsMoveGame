@@ -8,7 +8,7 @@ public class MoveController : MonoBehaviour {
 	public Transform Sphere;
 
 	Renderer sphereRenderer;
-	private Light sphereLight;
+	public Light sphereLight;
 
 	public Action OnRight;
 	public Action OnUp;
