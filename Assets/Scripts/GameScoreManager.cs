@@ -25,7 +25,7 @@ public class GameScoreManager : MonoBehaviour {
 	}
 
 	public void RemoveLive(){
-		Lives++;
+		Lives--;
 		
 		LiveLabel.text = Lives + " left!";
 

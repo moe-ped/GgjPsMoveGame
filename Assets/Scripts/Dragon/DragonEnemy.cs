@@ -12,7 +12,7 @@ public class DragonEnemy : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			Destroy (gameObject);
 
-
+			GameScoreManager.Instance.RemoveLive();
 		}
 	}
 
