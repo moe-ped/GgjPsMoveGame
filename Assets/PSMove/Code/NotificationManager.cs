@@ -27,7 +27,7 @@ public class NotificationManager : MonoBehaviour {
 
 		messages.Add(notification);
 
-		notification.transform.SetParent (GameObject.Find ("Canvas").transform);
+		notification.transform.SetParent (GameObject.Find ("UICanvas").transform);
 		notification.transform.localScale = Vector3.one;
 
 		var extraY = messages.Count != 0 ? messages.Last().transform.position.y - 5 : 0;

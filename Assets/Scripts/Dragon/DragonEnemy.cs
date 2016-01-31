@@ -12,12 +12,13 @@ public class DragonEnemy : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			Destroy (gameObject);
 
-			GameScoreManager.Instance.RemoveLive();
+			HealthManager.Instance.LoseLive();
 		}
 	}
 
 	public void HitWithElements (Element[] elements) {
 		if (ThatHurt (elements)) {
+			DragonSpawner.Instance.OnDragonKilled ();
 			StartCoroutine (DragonDied(gameObject));
 		}
 	}
