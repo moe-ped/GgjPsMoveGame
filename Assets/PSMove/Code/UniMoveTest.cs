@@ -146,8 +146,8 @@ public class UniMoveTest : MonoBehaviour
 			// Reset once in a while because of drifting
 			else if(move.GetButtonDown(PSMoveButton.Move)) {
 				move.ResetOrientation();
-				moveObj.SetLED(Color.black);
-				move.SetLED(Color.black);
+				//moveObj.SetLED(Color.black);
+				//move.SetLED(Color.black);
 			}
 
 

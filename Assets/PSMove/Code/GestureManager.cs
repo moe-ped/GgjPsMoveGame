@@ -3,27 +3,27 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class GestureManager : MonoBehaviour, IGestureManager, IGestureProvider{
+public class GestureManager : MonoBehaviour, IGestureProvider{
 		
-	public static IGestureManager Instance;
+	public static GestureManager Instance;
 
 	public Action<PSMoveEvent> OnGesture { get; set; }
 
-	List<MoveController> controllers = new List<MoveController>();
+	public List<MoveController> Controllers = new List<MoveController>();
 
 	public void Awake(){
 		Instance = this;
 	}
 
 	public void AddController(MoveController controller){
-		controllers.Add(controller);
+		Controllers.Add(controller);
 
-		controller.Controller.ControllerId = (ControllerId) controllers.Count;
+		controller.Controller.ControllerId = (ControllerId) Controllers.Count;
 		controller.Controller.OnEvent = OnControllerGestureHandler;
 	}
 
 	public void RemoveController(MoveController controller){
-		controllers.Remove(controller);
+		Controllers.Remove(controller);
 	}
 
 	public void SetControllerLEDColor (ControllerId controllerId, Color color, float resetColorAfterTime = -1)
@@ -64,7 +64,7 @@ public class GestureManager : MonoBehaviour, IGestureManager, IGestureProvider{
 	}
 
 	private MoveController GetControllerById(ControllerId id){
-		return this.controllers.Find(x => x.Controller.ControllerId == id);
+		return this.Controllers.Find(x => x.Controller.ControllerId == id);
 	}
 
 
@@ -80,10 +80,10 @@ public class PSMoveEvent
 	public EventType EventType;
 }
 
-public interface IGestureManager  {
-	Action<PSMoveEvent> OnGesture {get; set;}
-	void SetControllerLEDColor(ControllerId controllerId, Color color, float resetColorAfterTime = -1);
-	/* rumble 0-1 */
-	void SetControllerRumble(ControllerId controllerId, float rumbleIntensity, float rumbleDuration = -1);
-	void StopControllerRumble(ControllerId controllerId);
-}
+//public interface IGestureManager  {
+//	Action<PSMoveEvent> OnGesture {get; set;}
+//	void SetControllerLEDColor(ControllerId controllerId, Color color, float resetColorAfterTime = -1);
+//	/* rumble 0-1 */
+//	void SetControllerRumble(ControllerId controllerId, float rumbleIntensity, float rumbleDuration = -1);
+//	void StopControllerRumble(ControllerId controllerId);
+//

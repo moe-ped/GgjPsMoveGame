@@ -20,7 +20,8 @@ public class Cannonball : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D (Collision2D other) {
-		if (other.gameObject.tag == "Enemy") {
+		if (other.gameObject.tag == "Enemy")
+		{
 			var dragon = other.gameObject.GetComponent<DragonEnemy> ();
 			dragon.HitWithElements (Elements);
 			DestroyParticleSystems ();
@@ -29,7 +30,8 @@ public class Cannonball : MonoBehaviour {
 	}
 
 	void SpawnParticles () {
-		foreach (var element in _elements) {
+		foreach (var element in _elements)
+		{
 			Transform particleSystem = ((GameObject)Instantiate (ParticleSystems[(int)element], transform.position, Quaternion.identity)).transform;
 			particleSystem.SetParent (transform);
 			SpawnedParticleSystems.Add (particleSystem);
