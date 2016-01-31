@@ -28,7 +28,6 @@ public class HealthManager : MonoBehaviour {
 	public void LoseLive() {
 		UpdateLiveUI();
 		shaker.doShake();
-
 	}
 
 	void UpdateLiveUI() {

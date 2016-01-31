@@ -172,9 +172,9 @@ public class UniMoveTest : MonoBehaviour
 		{
             for (int i = 0; i < moves.Count; i++)
 			{
-                display += string.Format("PS Move {0}: ax:{1:0.000}, ay:{2:0.000}, az:{3:0.000} gx:{4:0.000}, gy:{5:0.000}, gz:{6:0.000}\n",
-				                         i+1, moves[i].Acceleration.x, moves[i].Acceleration.y, moves[i].Acceleration.z,
-				                         moves[i].Gyro.x, moves[i].Gyro.y, moves[i].Gyro.z);
+                //display += string.Format("PS Move {0}: ax:{1:0.000}, ay:{2:0.000}, az:{3:0.000} gx:{4:0.000}, gy:{5:0.000}, gz:{6:0.000}\n",
+				 //                       i+1, moves[i].Acceleration.x, moves[i].Acceleration.y, moves[i].Acceleration.z,
+				   //                      moves[i].Gyro.x, moves[i].Gyro.y, moves[i].Gyro.z);
             
 
 				var curY = moves[i].RawAcceleration.y;
