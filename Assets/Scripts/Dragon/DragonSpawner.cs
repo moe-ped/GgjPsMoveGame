@@ -31,7 +31,7 @@ public class DragonSpawner : MonoBehaviour {
 		GameObject dragon = (GameObject)Instantiate (DragonPrefab, position, Quaternion.identity);
 		BodypartSpriteSelector bodypartSpriteSelector = dragon.GetComponent<BodypartSpriteSelector> ();
 		MoveAtConstantSpeed moveAtConstantSpeed = dragon.GetComponent<MoveAtConstantSpeed> ();
-		DragonAttack dragonAttack = dragon.GetComponent<DragonAttack> ();
+		DragonEnemy dragonAttack = dragon.GetComponent<DragonEnemy> ();
 		Element[] elements = new Element[3];
 		for (int i = 0; i < elements.Length; i++) {
 			elements [i] = (Element)Random.Range (0, 3);

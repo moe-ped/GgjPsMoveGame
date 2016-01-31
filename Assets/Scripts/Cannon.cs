@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Cannon : MonoBehaviour {
@@ -6,15 +6,16 @@ public class Cannon : MonoBehaviour {
 	[SerializeField]
 	private GameObject CannonballPrefab;
 	[SerializeField]
-	private KeyboardGestureProvider GestureProvider;
-	[SerializeField]
 	private Animator Animator;
 
-	private GestureType[] Gestures = new GestureType[3];
+
+	private IGestureProvider GestureProvider;
+
+	private EventType[] Gestures = new EventType[3];
 	private bool AllGesturesMade {
 		get {
 			for (int i = 0; i < Gestures.Length; i++) {
-				if (Gestures [i] == GestureType.None) {
+				if (Gestures [i] == EventType.None) {
 					return false;
 				}
 			}
@@ -25,15 +26,19 @@ public class Cannon : MonoBehaviour {
 	// Test
 	void Start () {
 		GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
-		GestureProvider.EventGestureMade += AddGesture;
+		//GestureProvider = FindObjectOfType<GestureManager> ();
+
+		GestureProvider.OnGesture += AddGesture;
 		ResetGestures ();
 	}
 
-	public void AddGesture (GestureType type, int controllerId) {
-		Gestures [controllerId] = type;
-		if (AllGesturesMade) {
-			Shoot ();
-			ResetGestures ();
+	public void AddGesture (PSMoveEvent ev) {
+		if(ev.EventType == EventType.Left || ev.EventType == EventType.Right || ev.EventType == EventType.Up){
+			Gestures [(int) ev.ControllerId] = ev.EventType;
+			if (AllGesturesMade) {
+				Shoot ();
+				ResetGestures ();
+			}
 		}
 	}
 
@@ -47,11 +52,11 @@ public class Cannon : MonoBehaviour {
 
 	private void ResetGestures() {
 		for (int i = 0; i < Gestures.Length; i++) {
-			Gestures [i] = GestureType.None;
+			Gestures [i] = EventType.None;
 		}
 	}
 
-	private Element[] GesturesToElements(GestureType[] gestures) {
+	private Element[] GesturesToElements(EventType[] gestures) {
 		Element[] elements = new Element[gestures.Length];
 		for (int i=0; i<gestures.Length; i++) {
 			elements [i] = (Element)(int)gestures [i];
