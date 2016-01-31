@@ -7,6 +7,8 @@ public class Cannon : MonoBehaviour {
 	private GameObject CannonballPrefab;
 	[SerializeField]
 	private KeyboardGestureProvider GestureProvider;
+	[SerializeField]
+	private Animator Animator;
 
 	private GestureType[] Gestures = new GestureType[3];
 	private bool AllGesturesMade {
@@ -40,6 +42,7 @@ public class Cannon : MonoBehaviour {
 		cannonball.GetComponent<Cannonball> ().Elements = GesturesToElements(Gestures);
 		Rigidbody2D rigidbody2D = cannonball.GetComponent<Rigidbody2D> ();
 		rigidbody2D.AddForce (transform.right*15, ForceMode2D.Impulse);
+		Animator.Play ("Attack");
 	}
 
 	private void ResetGestures() {
