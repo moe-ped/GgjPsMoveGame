@@ -32,8 +32,11 @@ public class Cannon : MonoBehaviour {
 
 	// Test
 	void Start () {
-		//GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
-		GestureProvider = FindObjectOfType<GestureManager> ();
+		if(Application.platform == RuntimePlatform.OSXEditor){
+			GestureProvider = FindObjectOfType<GestureManager> ();
+		} else{
+			GestureProvider = FindObjectOfType<KeyboardGestureProvider> ();
+		}
 
 		GestureProvider.OnGesture += OnGestureHandler;
 		Reset ();
