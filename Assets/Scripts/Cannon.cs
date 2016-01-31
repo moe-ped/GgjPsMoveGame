@@ -149,7 +149,7 @@ public class Cannon : MonoBehaviour {
 	private static Dictionary<EventType, Color> GesturesToColorsMap = new Dictionary<EventType, Color>(){
 		{EventType.Left, Color.red},
 		{EventType.Right, Color.blue},
-		{EventType.Up, Color.green}
+		{EventType.Up, Color.yellow}
 	};
 
 	

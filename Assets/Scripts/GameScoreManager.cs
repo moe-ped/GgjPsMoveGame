@@ -11,7 +11,7 @@ public class GameScoreManager : MonoBehaviour {
 
 	public int Score;
 
-	public int Lives;
+	public int Lives = 5;
 
 	// Use this for initialization
 	void Awake () {

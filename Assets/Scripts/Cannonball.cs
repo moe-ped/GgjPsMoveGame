@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Cannonball : MonoBehaviour {
 
@@ -42,7 +43,7 @@ public class Cannonball : MonoBehaviour {
 			particleSystem.SetParent (transform);
 			SpawnedParticleSystems.Add (particleSystem);
 		}
-		} catch(UnityException e){
+		} catch(Exception e){
 			Debug.Log(e);
 		}
 	}
